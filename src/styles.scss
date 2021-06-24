@@ -21,16 +21,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .product-card mat-form-field {
-    width: 94%;
-    margin: 20px 20px;
+    width: 100%;
 }
 
 .product-card .mat-pseudo-checkbox {
     background: #A288E3;
+    border-color: #38023B;
 }
 
 .purple-button {
     background-color: #A288E3;
-    color: white;
-    width: 1000%;
+    color: #E5E5EA;
+    width: 100%;
 }

@@ -16,6 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { PlanningHostLandingComponent } from './planning/planning-host-landing/planning-host-landing.component';
+import { PlanningHostSetupComponent } from './planning/planning-host-setup/planning-host-setup.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     PlanningHostComponent,
     PlanningParticipantComponent,
     LandingComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PlanningHostLandingComponent,
+    PlanningHostSetupComponent
   ],
   imports: [
     BrowserModule,

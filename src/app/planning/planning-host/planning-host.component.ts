@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanningCard } from 'src/app/models/planning-card';
+import { PlanningCard } from 'src/app/models/planning-card.enum';
 
 @Component({
   selector: 'app-planning-host',
@@ -7,7 +7,7 @@ import { PlanningCard } from 'src/app/models/planning-card';
   styleUrls: ['./planning-host.component.scss']
 })
 export class PlanningHostComponent implements OnInit {
-  availableCards: PlanningCard[] = [
+  selectedAvailableCards: string[] = [
     PlanningCard.zero,
     PlanningCard.one,
     PlanningCard.two,
@@ -20,63 +20,25 @@ export class PlanningHostComponent implements OnInit {
     PlanningCard.hundred,
     PlanningCard.coffee,
     PlanningCard.question
-  ]
+  ] as string[]
 
-  selectedAvailableCards: String[] = this.availableCards as String[]
+  get availableCards() {
+    return this.selectedAvailableCards.map( key => key as PlanningCard )
+  }
+  sessionName: string = ""
+  userName: string = ""
+  sessionStarted: boolean = false
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onNgModelChange(event: String[]) {
-    console.log('on ng model change', event);
-    this.selectedAvailableCards = event
+  didTapStartSession() {
+    this.sessionStarted = true
   }
 
-  cardName(planningCard: PlanningCard): String {
-    var name: String = ""
-
-    switch (planningCard) {
-      case PlanningCard.zero:
-        name = "Zero"
-        break
-      case PlanningCard.one:
-        name = "One"
-        break
-      case PlanningCard.two:
-        name = "Two"
-        break
-      case PlanningCard.three:
-        name = "Three"
-        break
-      case PlanningCard.five:
-        name = "Five"
-        break
-      case PlanningCard.eight:
-        name = "Eight"
-        break
-      case PlanningCard.thirteen:
-        name = "Thirteen"
-        break
-      case PlanningCard.twenty:
-        name = "Twenty"
-        break
-      case PlanningCard.fourty:
-        name = "Fourty"
-        break
-      case PlanningCard.hundred:
-        name = "Hundred"
-        break
-      case PlanningCard.coffee:
-        name = "Coffee"
-        break
-      case PlanningCard.question:
-        name = "Question"
-        break
-    }
-    return name
+  updateSelectedAvailableCards(availableCards: string[]) {
+    this.selectedAvailableCards = availableCards
   }
 }
-
-
