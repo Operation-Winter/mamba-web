@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.product-card {
+    max-width: 600px;
+    margin: 20px;
+    background-color: #E5E5EA;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+}
+
+.product-card mat-card-title {
+    color: #A288E3;
+}
+
+.product-card .mat-form-field-outline {
+    background-color: #D1D1D6;
+}
+
+.product-card mat-form-field {
+    width: 94%;
+    margin: 20px 20px;
+}
+
+.product-card .mat-pseudo-checkbox {
+    background: #A288E3;
+}
+
+.purple-button {
+    background-color: #A288E3;
+    color: white;
+    width: 1000%;
+}
