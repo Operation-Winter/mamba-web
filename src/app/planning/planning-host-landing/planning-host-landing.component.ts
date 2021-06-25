@@ -93,7 +93,7 @@ export class PlanningHostLandingComponent implements OnInit {
   onClickAddTicket() {
     const dialogRef = this.dialog.open(AddTicketDialogComponent, {
       minWidth: '400px',
-      maxWidth: '500px',
+      maxWidth: '600px',
       data: new PlanningAddTicketMessage("", "")
     })
 
