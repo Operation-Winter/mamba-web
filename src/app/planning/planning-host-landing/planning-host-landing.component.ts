@@ -14,6 +14,7 @@ import { PlanningTicket } from 'src/app/models/planning-ticket';
 import { PlanningAddTicketMessage } from 'src/app/models/messages/planning-add-ticket-message';
 import { AddTicketDialogComponent } from '../add-ticket-dialog/add-ticket-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PlanningCardMapper } from 'src/app/mapper/planning-card-mapper';
 
 @Component({
   selector: 'app-planning-host-landing',
@@ -142,7 +143,7 @@ export class PlanningHostLandingComponent implements OnInit {
 
   votingValue(participantId: string): string | undefined {
     let vote = this.ticket?.ticketVotes.filter(vote => vote.participantId == participantId)[0]
-    return vote?.selectedCard
+    return new PlanningCardMapper().cardValue(vote!.selectedCard)
   }
 
   execute(command: PlanningCommandHostReceive) {

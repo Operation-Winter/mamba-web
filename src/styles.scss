@@ -47,3 +47,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-card-content h2 {
     color: #A288E3;
 }
+
+.right-align > .mat-grid-tile-content {
+    justify-content: flex-end !important;
+}
+
+.left-align > .mat-grid-tile-content {
+    justify-content: flex-start !important;
+}
