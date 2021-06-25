@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { webSocket } from 'rxjs/webSocket';
 import { Subscription } from 'rxjs';
 import { UUID } from 'angular2-uuid';
-import { PlanningCommandHostSend } from 'src/app/models/planning-command-host-send';
+import { PlanningCommandHostSend } from 'src/app/models/host/planning-command-host-send';
 import { PlanningHostCommandMapper } from 'src/app/mapper/planning-host-command-mapper';
 import { PlanningCard } from 'src/app/models/planning-card.enum';
 
@@ -12,6 +12,8 @@ import { PlanningCard } from 'src/app/models/planning-card.enum';
   styleUrls: ['./planning-host-landing.component.scss']
 })
 export class PlanningHostLandingComponent implements OnInit {
+  hostCommandMapper = new PlanningHostCommandMapper()
+
   webSocketSubject = webSocket({
     binaryType: 'arraybuffer',
     url: 'ws://localhost:8080/planning/host', 
@@ -23,19 +25,24 @@ export class PlanningHostLandingComponent implements OnInit {
     deserializer: msg => new Uint8Array(msg.data as ArrayBuffer)
   })
   subscription: Subscription
-  chardata: any[] = []
-  chartOptions: any
+  
   uuid = UUID.UUID()
-  @Input() sessionName: String = ""
-  @Input() userName: String = ""
+  @Input() sessionName: string = ""
+  @Input() userName: string = ""
   @Input() availableCards: PlanningCard[] = []
-  hostCommandMapper = new PlanningHostCommandMapper()
+  
+  ticketTitle: string = ""
+  ticketDescription: string = ""
 
   constructor() {
     this.subscription = this.webSocketSubject.subscribe(
-      msg => console.log('message received: ' + new TextDecoder().decode(msg)), // Called whenever there is a message from the server.
-      err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      () => console.log('complete') // Called when connection is closed (for whatever reason).
+      msg => {
+        let jsonObject = JSON.parse(new TextDecoder().decode(msg))
+        let incomingCommand = this.hostCommandMapper.mapIncomingCommand(jsonObject)
+        console.log('message received: ', jsonObject, incomingCommand)
+      },
+      err => console.log(err),
+      () => console.log('complete')
     )
   }
 
@@ -48,5 +55,10 @@ export class PlanningHostLandingComponent implements OnInit {
     console.log("WebSocket send data: ", command)
     let encodedCommand = new TextEncoder().encode(JSON.stringify(command))
     this.webSocketSubject.next(encodedCommand)
+  }
+
+  onClickAddTicket() {
+    var command = this.hostCommandMapper.mapAddTicketCommand(this.uuid, this.ticketTitle, this.ticketDescription)
+    this.sendCommand(command)
   }
 }

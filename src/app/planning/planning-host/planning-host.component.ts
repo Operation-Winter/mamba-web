@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanningCardMapper } from 'src/app/mapper/planning-card-mapper';
 import { PlanningCard } from 'src/app/models/planning-card.enum';
 
 @Component({
@@ -7,20 +8,7 @@ import { PlanningCard } from 'src/app/models/planning-card.enum';
   styleUrls: ['./planning-host.component.scss']
 })
 export class PlanningHostComponent implements OnInit {
-  selectedAvailableCards: string[] = [
-    PlanningCard.zero,
-    PlanningCard.one,
-    PlanningCard.two,
-    PlanningCard.three,
-    PlanningCard.five,
-    PlanningCard.eight,
-    PlanningCard.thirteen,
-    PlanningCard.twenty,
-    PlanningCard.fourty,
-    PlanningCard.hundred,
-    PlanningCard.coffee,
-    PlanningCard.question
-  ] as string[]
+  selectedAvailableCards: string[] = new PlanningCardMapper().allCases as string[]
 
   get availableCards() {
     return this.selectedAvailableCards.map( key => key as PlanningCard )

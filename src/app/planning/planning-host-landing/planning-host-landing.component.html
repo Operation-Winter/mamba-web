@@ -1,3 +1,30 @@
-<p>
-  planning-host-landing works!
-</p>
+<mat-card class="product-card" *ngIf="">
+  <mat-card-header>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>To start voting on tickets, you need to add a ticket first</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form #sessionForm="ngForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="ticketTitle" name="ticketTitle" placeholder="Enter the ticket's title" required
+          minlength="2" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="ticketDescription" name="ticketDescription"
+          placeholder="Enter the ticket's description" required minlength="2" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-list role="navigation">
+      <mat-list-item>
+        <button mat-raised-button class="purple-button" (click)="onClickAddTicket()">
+          Add ticket
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-actions>
+</mat-card>

@@ -1,5 +1,5 @@
 import { PlanningCommandHostSendType } from "./planning-command-host-send-type.enum";
-import { PlanningCommandSend } from "./planning-command-send";
+import { PlanningCommandSend } from "../planning-command-send";
 
 export class PlanningCommandHostSend implements PlanningCommandSend  {
     uuid: string
