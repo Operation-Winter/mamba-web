@@ -1,7 +1,8 @@
-<mat-card class="product-card">
+<mat-card class="product-card" *ngIf="isNoneState">
   <mat-card-header>
     <mat-card-title>{{sessionName}}</mat-card-title>
     <mat-card-subtitle>To start voting on tickets, you need to add a ticket first</mat-card-subtitle>
+    <mat-card-subtitle>Session code: {{sessionCode}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <form #sessionForm="ngForm">
@@ -19,11 +20,86 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <mat-list role="navigation">
+    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
+      Add ticket
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
+      End session
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="product-card" *ngIf="isVotingState">
+  <mat-card-header>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Vote State</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
+      Add ticket
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()">
+      Finish voting
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
+      End session
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="product-card" *ngIf="isFinishedVotingState">
+  <mat-card-header>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Finished State</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
+      Add ticket
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()">
+      Revote
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
+      End session
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="product-card" *ngIf="isErrorState">
+  <mat-card-header>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Error State</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="product-card" *ngIf="isSessionEndedState">
+  <mat-card-header>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Session Ended State</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="product-card" *ngIf="isNoneState || isVotingState || isFinishedVotingState">
+  <mat-card-header>
+    <mat-card-title>Participants</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <mat-list *ngFor="let participant of participants">
       <mat-list-item>
-        <button mat-raised-button class="purple-button" (click)="onClickAddTicket()">
-          Add ticket
-        </button>
+        <mat-icon mat-list-icon>note</mat-icon>
+        {{participant.name}}
       </mat-list-item>
     </mat-list>
   </mat-card-actions>
