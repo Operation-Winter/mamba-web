@@ -10,16 +10,4 @@ export class PlanningTicket {
         this.description = description
         this.ticketVotes = ticketVotes
     }
-
-    removeVotes(participantId: string) {
-        this.ticketVotes = this.ticketVotes.filter(item => item.participantId == participantId)
-    }
-    
-    removeVotesAll() {
-        this.ticketVotes = []
-    }
-    
-    add(vote: PlanningTicketVote) {
-        this.ticketVotes.push(vote)
-    }
 }

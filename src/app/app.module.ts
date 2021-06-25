@@ -20,6 +20,7 @@ import { PlanningHostLandingComponent } from './planning/planning-host-landing/p
 import { PlanningHostSetupComponent } from './planning/planning-host-setup/planning-host-setup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddTicketDialogComponent } from './planning/add-ticket-dialog/add-ticket-dialog.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AddTicketDialogComponent } from './planning/add-ticket-dialog/add-ticke
     MatListModule,
     MatInputModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
