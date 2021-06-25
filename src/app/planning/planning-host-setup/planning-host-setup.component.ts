@@ -13,17 +13,6 @@ export class PlanningHostSetupComponent implements OnInit {
   startSessionDisabled: boolean = true
   selectedAvailableCardValues: string[] = this.availableCards
   sessionNameValue: string = ""
-  userNameValue: string = ""
-
-  @Input()
-  get userName() {
-    return this.userNameValue
-  }
-  set userName(value) {
-    this.userNameValue = value
-    this.userNameChange.emit(value)
-  }
-  @Output() userNameChange = new EventEmitter<string>()
 
   @Input()
   get selectedAvailableCards() {

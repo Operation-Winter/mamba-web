@@ -8,7 +8,6 @@
 <ng-template #setup>
   <app-planning-host-setup
     [(sessionName)]="sessionName"
-    [(userName)]="userName"
     [(selectedAvailableCards)]="selectedAvailableCards"
     (startSessionTapped)="didTapStartSession()"
   ></app-planning-host-setup>
@@ -17,7 +16,6 @@
 <ng-template #landing>
   <app-planning-host-landing
     [sessionName]="sessionName"
-    [userName]="userName"
     [availableCards]="availableCards"
   ></app-planning-host-landing>
 </ng-template>

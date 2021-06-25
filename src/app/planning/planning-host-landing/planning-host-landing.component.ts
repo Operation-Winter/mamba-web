@@ -10,6 +10,10 @@ import { PlanningCommandHostReceiveType } from 'src/app/models/host/planning-com
 import { PlanningSessionState } from 'src/app/models/planning-session-state.enum';
 import { PlanningSessionStateMessage } from 'src/app/models/messages/planning-session-state-message';
 import { PlanningParticipant } from 'src/app/models/planning-participant';
+import { PlanningTicket } from 'src/app/models/planning-ticket';
+import { PlanningAddTicketMessage } from 'src/app/models/messages/planning-add-ticket-message';
+import { AddTicketDialogComponent } from '../add-ticket-dialog/add-ticket-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-planning-host-landing',
@@ -33,7 +37,6 @@ export class PlanningHostLandingComponent implements OnInit {
 
   uuid = UUID.UUID()
   @Input() sessionName: string = ""
-  @Input() userName: string = ""
   @Input() availableCards: PlanningCard[] = []
 
   ticketTitle: string = ""
@@ -42,6 +45,7 @@ export class PlanningHostLandingComponent implements OnInit {
   state = PlanningSessionState.none
   sessionCode: string = ""
   participants: PlanningParticipant[] = []
+  ticket: PlanningTicket | undefined
 
   get isNoneState() {
     return this.state == PlanningSessionState.none
@@ -63,7 +67,7 @@ export class PlanningHostLandingComponent implements OnInit {
     return this.state == PlanningSessionState.sessionEnded
   }
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.subscription = this.webSocketSubject.subscribe(
       msg => {
         let jsonObject = JSON.parse(new TextDecoder().decode(msg))
@@ -87,8 +91,16 @@ export class PlanningHostLandingComponent implements OnInit {
   }
 
   onClickAddTicket() {
-    var command = this.hostCommandMapper.mapAddTicketCommand(this.uuid, this.ticketTitle, this.ticketDescription)
-    this.sendCommand(command)
+    const dialogRef = this.dialog.open(AddTicketDialogComponent, {
+      minWidth: '400px',
+      maxWidth: '500px',
+      data: new PlanningAddTicketMessage("", "")
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      var command = this.hostCommandMapper.mapAddTicketCommand(this.uuid, result.title, result.description)
+      this.sendCommand(command)
+    })
   }
 
   onClickFinishVoting() {
@@ -101,24 +113,35 @@ export class PlanningHostLandingComponent implements OnInit {
     this.sendCommand(command)
   }
 
+  onClickRevote() {
+    var command = this.hostCommandMapper.mapRevoteCommand(this.uuid)
+    this.sendCommand(command)
+  }
+
   execute(command: PlanningCommandHostReceive) {
     console.log('message received: ', command)
     switch (command.type) {
       case PlanningCommandHostReceiveType.noneState:
         this.state = PlanningSessionState.none
-        var stateMessage = command.message as PlanningSessionStateMessage
-        this.sessionCode = stateMessage.sessionCode
-        this.participants = stateMessage.participants
+        this.assignStateMessage(command.message as PlanningSessionStateMessage)
         break
       case PlanningCommandHostReceiveType.votingState:
         this.state = PlanningSessionState.voting
+        this.assignStateMessage(command.message as PlanningSessionStateMessage)
         break
       case PlanningCommandHostReceiveType.finishedState:
         this.state = PlanningSessionState.finishedVoting
+        this.assignStateMessage(command.message as PlanningSessionStateMessage)
         break
       case PlanningCommandHostReceiveType.invalidCommand:
         this.state = PlanningSessionState.error
         break
     }
+  }
+
+  assignStateMessage(stateMessage: PlanningSessionStateMessage) {
+    this.sessionCode = stateMessage.sessionCode
+    this.participants = stateMessage.participants
+    this.ticket = stateMessage.ticket
   }
 }

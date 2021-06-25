@@ -1,23 +1,10 @@
 <mat-card class="product-card" *ngIf="isNoneState">
-  <mat-card-header>
+  <mat-card-content>
     <mat-card-title>{{sessionName}}</mat-card-title>
     <mat-card-subtitle>To start voting on tickets, you need to add a ticket first</mat-card-subtitle>
-    <mat-card-subtitle>Session code: {{sessionCode}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <form #sessionForm="ngForm">
-      <mat-form-field appearance="outline">
-        <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="ticketTitle" name="ticketTitle" placeholder="Enter the ticket's title" required
-          minlength="2" />
-      </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <input matInput [(ngModel)]="ticketDescription" name="ticketDescription"
-          placeholder="Enter the ticket's description" required minlength="2" />
-      </mat-form-field>
-    </form>
+    <h2>Session code</h2>
+    <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
@@ -30,12 +17,17 @@
 </mat-card>
 
 <mat-card class="product-card" *ngIf="isVotingState">
-  <mat-card-header>
-    <mat-card-title>{{sessionName}}</mat-card-title>
-    <mat-card-subtitle>Vote State</mat-card-subtitle>
-  </mat-card-header>
   <mat-card-content>
+    <mat-card-title>{{sessionName}}</mat-card-title>
 
+    <h2>Session code</h2>
+    <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
+
+    <h2>Ticket title</h2>
+    <mat-card-subtitle>{{ticket!.title}}</mat-card-subtitle>
+
+    <h2>Ticket description</h2>
+    <mat-card-subtitle>{{ticket!.description}}</mat-card-subtitle>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
@@ -51,18 +43,22 @@
 </mat-card>
 
 <mat-card class="product-card" *ngIf="isFinishedVotingState">
-  <mat-card-header>
-    <mat-card-title>{{sessionName}}</mat-card-title>
-    <mat-card-subtitle>Finished State</mat-card-subtitle>
-  </mat-card-header>
   <mat-card-content>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <h2>Session code</h2>
+    <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
 
+    <h2>Ticket title</h2>
+    <mat-card-subtitle>{{ticket!.title}}</mat-card-subtitle>
+
+    <h2>Ticket description</h2>
+    <mat-card-subtitle>{{ticket!.description}}</mat-card-subtitle>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
       Add ticket
     </button>
-    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()">
+    <button mat-raised-button class="purple-button-command" (click)="onClickRevote()">
       Revote
     </button>
     <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
@@ -72,35 +68,39 @@
 </mat-card>
 
 <mat-card class="product-card" *ngIf="isErrorState">
-  <mat-card-header>
-    <mat-card-title>{{sessionName}}</mat-card-title>
-    <mat-card-subtitle>Error State</mat-card-subtitle>
-  </mat-card-header>
   <mat-card-content>
-
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Something has gone horribly wrong. Please start a new session.</mat-card-subtitle>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button" routerLink="./planning/host">
+      Go back to landing
+    </button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card class="product-card" *ngIf="isSessionEndedState">
-  <mat-card-header>
-    <mat-card-title>{{sessionName}}</mat-card-title>
-    <mat-card-subtitle>Session Ended State</mat-card-subtitle>
-  </mat-card-header>
   <mat-card-content>
-
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>The session has been ended.</mat-card-subtitle>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button" routerLink="./">
+      Go back to landing
+    </button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card class="product-card" *ngIf="isNoneState || isVotingState || isFinishedVotingState">
-  <mat-card-header>
+  <mat-card-content>
     <mat-card-title>Participants</mat-card-title>
-  </mat-card-header>
+  </mat-card-content>
   <mat-card-actions>
-    <mat-list *ngFor="let participant of participants">
-      <mat-list-item>
-        <mat-icon mat-list-icon>note</mat-icon>
+    <mat-selection-list #participantsList [multiple]="false">
+      <mat-list-option *ngFor="let participant of participants" [value]="participant.participantId">
+        <mat-icon mat-list-icon>account_circle</mat-icon>
         {{participant.name}}
-      </mat-list-item>
-    </mat-list>
+      </mat-list-option>
+    </mat-selection-list>
   </mat-card-actions>
 </mat-card>

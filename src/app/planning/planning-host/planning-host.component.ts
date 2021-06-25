@@ -14,7 +14,6 @@ export class PlanningHostComponent implements OnInit {
     return this.selectedAvailableCards.map( key => key as PlanningCard )
   }
   sessionName: string = ""
-  userName: string = ""
   sessionStarted: boolean = false
 
   constructor() { }

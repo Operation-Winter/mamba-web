@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { PlanningHostLandingComponent } from './planning/planning-host-landing/planning-host-landing.component';
 import { PlanningHostSetupComponent } from './planning/planning-host-setup/planning-host-setup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddTicketDialogComponent } from './planning/add-ticket-dialog/add-ticket-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PlanningHostSetupComponent } from './planning/planning-host-setup/plann
     LandingComponent,
     PageNotFoundComponent,
     PlanningHostLandingComponent,
-    PlanningHostSetupComponent
+    PlanningHostSetupComponent,
+    AddTicketDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { PlanningHostSetupComponent } from './planning/planning-host-setup/plann
     MatButtonModule,
     MatListModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
