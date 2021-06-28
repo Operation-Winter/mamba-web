@@ -8,7 +8,7 @@
     <mat-icon mat-icon-button *ngIf="isVotingState">
       {{votingIcon(participant!.participantId)}}
     </mat-icon>
-    <div mat-icon-button *ngIf="isFinishedVotingState">
+    <div mat-icon-button *ngIf="isFinishedVotingState && votingValue(participant!.participantId) != null">
       {{votingValue(participant!.participantId)}}
     </div>
     <mat-icon mat-icon-button *ngIf="isFinishedVotingState && votingValue(participant!.participantId) == null">

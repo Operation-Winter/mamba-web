@@ -33,6 +33,9 @@ export class PlanningParticipantRowComponent implements OnInit {
 
   votingValue(participantId: string): string | undefined {
     let vote = this.ticket?.ticketVotes.filter(vote => vote.participantId == participantId)[0]
+    if (vote?.selectedCard == null) {
+      return undefined
+    }
     return new PlanningCardMapper().cardValue(vote!.selectedCard)
   }
 }
