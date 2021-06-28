@@ -4,27 +4,10 @@
   </mat-card-content>
   <mat-card-actions>
     <mat-selection-list #participantsList [multiple]="false">
-      <mat-list-option [matMenuTriggerFor]="menu" #menuTrigger *ngFor="let participant of participants"
-        [value]="participant.participantId">
-        <mat-icon mat-list-icon>account_circle</mat-icon>
-        <mat-grid-list cols="2">
-          <mat-grid-tile [colspan]="1" [rowspan]="1" class="left-align">
-            {{participant.name}}
-          </mat-grid-tile>
 
-          <mat-grid-tile [colspan]="1" [rowspan]="1" class="right-align">
-            <mat-icon mat-list-icon *ngIf="isVotingState">
-              {{votingIcon(participant.participantId)}}
-            </mat-icon>
-            <div *ngIf="isFinishedVotingState">
-              {{votingValue(participant.participantId)}}
-            </div>
-            <mat-icon mat-list-icon *ngIf="isFinishedVotingState && votingValue(participant.participantId) == null">
-              shortcut
-            </mat-icon>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-list-option>
+      <app-planning-participant-row [matMenuTriggerFor]="menu" #menuTrigger *ngFor="let participant of participants"
+        [participant]="participant" [isVotingState]="isVotingState" [isFinishedVotingState]="isFinishedVotingState"
+        [ticket]="ticket"></app-planning-participant-row>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onClickSkipVote(participantsList.selectedOptions.selected[0].value)"
           *ngIf="isVotingState">

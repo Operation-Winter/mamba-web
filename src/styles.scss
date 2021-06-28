@@ -48,10 +48,20 @@ mat-card-content h2 {
     color: #A288E3;
 }
 
-.right-align > .mat-grid-tile-content {
+.right-align {
     justify-content: flex-end !important;
 }
 
-.left-align > .mat-grid-tile-content {
+.left-align {
     justify-content: flex-start !important;
+}
+
+.mat-card-actions:not(.mat-card-actions-align-end) .mat-button:first-child, .mat-card-actions:not(.mat-card-actions-align-end) .mat-raised-button:first-child, .mat-card-actions:not(.mat-card-actions-align-end) .mat-stroked-button:first-child {
+    margin: 0px 8px !important;
+}
+
+.mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text {
+    flex-direction: row !important;
+    align-items: center;
+    flex-grow: inherit;
 }

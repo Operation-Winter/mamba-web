@@ -27,6 +27,7 @@ import { PlanningSessionEndedCardComponent } from './planning/shared/planning-se
 import { PlanningHostParticipantsCardComponent } from './planning/host/planning-host-participants-card/planning-host-participants-card.component';
 import { PlanningHostNoneStateCardComponent } from './planning/host/planning-host-none-state-card/planning-host-none-state-card.component';
 import { PlanningHostTicketCardComponent } from './planning/host/planning-host-ticket-card/planning-host-ticket-card.component';
+import { PlanningParticipantRowComponent } from './planning/shared/planning-participant-row/planning-participant-row.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PlanningHostTicketCardComponent } from './planning/host/planning-host-t
     PlanningSessionEndedCardComponent,
     PlanningHostParticipantsCardComponent,
     PlanningHostNoneStateCardComponent,
-    PlanningHostTicketCardComponent
+    PlanningHostTicketCardComponent,
+    PlanningParticipantRowComponent
   ],
   imports: [
     BrowserModule,

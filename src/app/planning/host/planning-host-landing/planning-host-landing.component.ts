@@ -14,6 +14,7 @@ import { PlanningTicket } from 'src/app/models/planning-ticket';
 import { PlanningAddTicketMessage } from 'src/app/models/messages/planning-add-ticket-message';
 import { AddTicketDialogComponent } from '../add-ticket-dialog/add-ticket-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PlanningCardMapper } from 'src/app/mapper/planning-card-mapper';
 
 @Component({
   selector: 'app-planning-host-landing',
@@ -150,5 +151,22 @@ export class PlanningHostLandingComponent implements OnInit {
     this.sessionCode = stateMessage.sessionCode
     this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket
+  }
+
+  votingIcon(participantId: string): string {
+    let vote = this.ticket?.ticketVotes.filter(vote => vote.participantId == participantId)[0]
+
+    if (vote == null) {
+      return "more_horiz"
+    } if (vote?.selectedCard == null) {
+      return "shortcut"
+    } else {
+      return "check_circle_outline"
+    }
+  }
+
+  votingValue(participantId: string): string | undefined {
+    let vote = this.ticket?.ticketVotes.filter(vote => vote.participantId == participantId)[0]
+    return new PlanningCardMapper().cardValue(vote!.selectedCard)
   }
 }

@@ -1,0 +1,18 @@
+<mat-list-option [value]="participant!.participantId">
+  <mat-icon mat-list-icon>account_circle</mat-icon>
+  <p class="left-align" style="flex-grow: inherit;">
+    {{participant?.name}}
+  </p>
+  
+  <div class="right-align">
+    <mat-icon mat-icon-button *ngIf="isVotingState">
+      {{votingIcon(participant!.participantId)}}
+    </mat-icon>
+    <div mat-icon-button *ngIf="isFinishedVotingState">
+      {{votingValue(participant!.participantId)}}
+    </div>
+    <mat-icon mat-icon-button *ngIf="isFinishedVotingState && votingValue(participant!.participantId) == null">
+      shortcut
+    </mat-icon>
+  </div>
+</mat-list-option>
