@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlanningHostComponent } from './planning/planning-host/planning-host.component';
+import { PlanningHostComponent } from './planning/host/planning-host/planning-host.component';
 import { PlanningParticipantComponent } from './planning/planning-participant/planning-participant.component';
 import { LandingComponent } from './landing/landing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,11 +16,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { PlanningHostLandingComponent } from './planning/planning-host-landing/planning-host-landing.component';
-import { PlanningHostSetupComponent } from './planning/planning-host-setup/planning-host-setup.component';
+import { PlanningHostLandingComponent } from './planning/host/planning-host-landing/planning-host-landing.component';
+import { PlanningHostSetupComponent } from './planning/host/planning-host-setup/planning-host-setup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddTicketDialogComponent } from './planning/add-ticket-dialog/add-ticket-dialog.component';
+import { AddTicketDialogComponent } from './planning/host/add-ticket-dialog/add-ticket-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { PlanningErrorStateCardComponent } from './planning/shared/planning-error-state-card/planning-error-state-card.component';
+import { PlanningLandingTicketCardContentComponent } from './planning/shared/planning-landing-ticket-card-content/planning-landing-ticket-card-content.component';
+import { PlanningSessionEndedCardComponent } from './planning/shared/planning-session-ended-card/planning-session-ended-card.component';
+import { PlanningHostParticipantsCardComponent } from './planning/host/planning-host-participants-card/planning-host-participants-card.component';
+import { PlanningHostNoneStateCardComponent } from './planning/host/planning-host-none-state-card/planning-host-none-state-card.component';
+import { PlanningHostTicketCardComponent } from './planning/host/planning-host-ticket-card/planning-host-ticket-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,13 @@ import { MatMenuModule } from '@angular/material/menu';
     PageNotFoundComponent,
     PlanningHostLandingComponent,
     PlanningHostSetupComponent,
-    AddTicketDialogComponent
+    AddTicketDialogComponent,
+    PlanningLandingTicketCardContentComponent,
+    PlanningErrorStateCardComponent,
+    PlanningSessionEndedCardComponent,
+    PlanningHostParticipantsCardComponent,
+    PlanningHostNoneStateCardComponent,
+    PlanningHostTicketCardComponent
   ],
   imports: [
     BrowserModule,

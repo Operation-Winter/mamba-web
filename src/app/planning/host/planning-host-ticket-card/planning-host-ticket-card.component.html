@@ -1,0 +1,27 @@
+<mat-card class="product-card">
+  <app-planning-landing-ticket-card-content [sessionName]="sessionName" [sessionCode]="sessionCode"
+    [ticketTitle]="ticketTitle" [ticketDescription]="ticketDescription">
+  </app-planning-landing-ticket-card-content>
+  <mat-card-actions *ngIf="isVotingState">
+    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
+      Add ticket
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()">
+      Finish voting
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
+      End session
+    </button>
+  </mat-card-actions>
+  <mat-card-actions *ngIf="isFinishedVotingState">
+    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
+      Add ticket
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickRevote()">
+      Revote
+    </button>
+    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
+      End session
+    </button>
+  </mat-card-actions>
+</mat-card>
