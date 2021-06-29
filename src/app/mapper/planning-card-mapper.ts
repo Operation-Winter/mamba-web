@@ -1,3 +1,4 @@
+import { isDevMode } from "@angular/core"
 import { PlanningCard } from "../models/planning-card.enum"
 
 export class PlanningCardMapper {
@@ -94,7 +95,7 @@ export class PlanningCardMapper {
 
         switch (planningCard) {
             case PlanningCard.zero:
-                value = "/assets/cards/Card 0.png"
+                value += "/assets/cards/Card 0.png"
                 break
             case PlanningCard.one:
                 value = "/assets/cards/Card 1.png"
@@ -130,7 +131,11 @@ export class PlanningCardMapper {
                 value = "/assets/cards/Card.png"
                 break
         }
-        return value
+        if (isDevMode()) {
+            return value
+        } else {
+            return "/mamba-web" + value
+        }
     }
 
     get allCases(): PlanningCard[] {
