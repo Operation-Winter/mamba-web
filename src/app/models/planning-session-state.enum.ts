@@ -5,5 +5,6 @@ export enum PlanningSessionState {
     error,
     sessionEnded,
     removeParticipant,
-    invalidSession
+    invalidSession,
+    participantLeft
 }

@@ -11,6 +11,7 @@ export class PlanningParticipantParticipantsCardComponent implements OnInit {
   @Input() ticket: PlanningTicket | undefined
   @Input() participants: PlanningParticipant[] = []
   @Input() isFinishedVotingState: boolean = false
+  @Input() isVotingState: boolean = false
 
   constructor() { }
 

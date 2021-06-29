@@ -27,11 +27,11 @@ export class PlanningHostTicketCardComponent implements OnInit {
   }
 
   onClickEndSession() {
-    this.didTapFinishVoting.emit()
+    this.didTapEndSession.emit()
   }
 
   onClickRevote() {
-    this.didTapFinishVoting.emit()
+    this.didTapRevote.emit()
   }
 
   onClickAddTicket() {

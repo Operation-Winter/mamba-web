@@ -2,22 +2,14 @@
   <app-planning-landing-ticket-card-content [sessionName]="sessionName" [sessionCode]="sessionCode"
     [ticketTitle]="ticketTitle" [ticketDescription]="ticketDescription">
   </app-planning-landing-ticket-card-content>
-  <mat-card-actions *ngIf="isVotingState">
+  <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
       Add ticket
     </button>
-    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()">
+    <button mat-raised-button class="purple-button-command" (click)="onClickFinishVoting()" *ngIf="isVotingState">
       Finish voting
     </button>
-    <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">
-      End session
-    </button>
-  </mat-card-actions>
-  <mat-card-actions *ngIf="isFinishedVotingState">
-    <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
-      Add ticket
-    </button>
-    <button mat-raised-button class="purple-button-command" (click)="onClickRevote()">
+    <button mat-raised-button class="purple-button-command" (click)="onClickRevote()" *ngIf="isFinishedVotingState">
       Revote
     </button>
     <button mat-raised-button class="purple-button-command" (click)="onClickEndSession()">

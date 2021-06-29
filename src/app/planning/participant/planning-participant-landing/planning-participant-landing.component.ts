@@ -33,10 +33,10 @@ export class PlanningParticipantLandingComponent implements OnInit {
   subscription: Subscription
 
   uuid = UUID.UUID()
-  
+
   @Input() userName: string = ""
   @Input() sessionCode: string = ""
-  
+
   state = PlanningSessionState.none
   sessionName: string = ""
   availableCards: PlanningCard[] = []
@@ -71,6 +71,10 @@ export class PlanningParticipantLandingComponent implements OnInit {
     return this.state == PlanningSessionState.invalidSession
   }
 
+  get isParticipantLeftState() {
+    return this.state == PlanningSessionState.participantLeft
+  }
+
   constructor() {
     this.subscription = this.webSocketSubject.subscribe(
       msg => {
@@ -79,7 +83,11 @@ export class PlanningParticipantLandingComponent implements OnInit {
         this.execute(incomingCommand)
       },
       err => console.log(err),
-      () => this.state = PlanningSessionState.sessionEnded
+      () => {
+        if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession 
+          && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant)
+          this.state = PlanningSessionState.sessionEnded
+      }
     )
   }
 
@@ -97,6 +105,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
   onClickLeaveSession() {
     var command = this.participantCommandMapper.mapLeaveSessionCommand(this.uuid)
     this.sendCommand(command)
+    this.state = PlanningSessionState.participantLeft
   }
 
   onClickVote(card: PlanningCard) {
@@ -135,6 +144,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
   }
 
   assignStateMessage(stateMessage: PlanningSessionStateMessage) {
+    this.sessionName = stateMessage.sessionName
     this.sessionCode = stateMessage.sessionCode
     this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket

@@ -36,6 +36,7 @@ import { PlanningParticipantTicketCardComponent } from './planning/participant/p
 import { PlanningParticipantParticipantsCardComponent } from './planning/participant/planning-participant-participants-card/planning-participant-participants-card.component';
 import { PlanningParticipantRemovedStateCardComponent } from './planning/participant/planning-participant-removed-state-card/planning-participant-removed-state-card.component';
 import { PlanningParticipantInvalidSessionStateCardComponent } from './planning/participant/planning-participant-invalid-session-state-card/planning-participant-invalid-session-state-card.component';
+import { PlanningParticipantLeftSessionCardComponent } from './planning/participant/planning-participant-left-session-card/planning-participant-left-session-card.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PlanningParticipantInvalidSessionStateCardComponent } from './planning/
     PlanningParticipantTicketCardComponent,
     PlanningParticipantParticipantsCardComponent,
     PlanningParticipantRemovedStateCardComponent,
-    PlanningParticipantInvalidSessionStateCardComponent
+    PlanningParticipantInvalidSessionStateCardComponent,
+    PlanningParticipantLeftSessionCardComponent
   ],
   imports: [
     BrowserModule,
