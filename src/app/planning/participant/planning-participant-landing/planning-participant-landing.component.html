@@ -1,0 +1,13 @@
+<app-planning-participant-none-state-card *ngIf="isNoneState"></app-planning-participant-none-state-card>
+
+<app-planning-participant-ticket-card *ngIf="isVotingState || isFinishedVotingState">
+</app-planning-participant-ticket-card>
+
+<app-planning-participant-voting-state-card *ngIf="isVotingState"></app-planning-participant-voting-state-card>
+
+<app-planning-error-state-card [sessionName]="sessionName" *ngIf="isErrorState"></app-planning-error-state-card>
+
+<app-planning-session-ended-card [sessionName]="sessionName" *ngIf="isSessionEndedState">
+</app-planning-session-ended-card>
+
+<app-planning-participant-participants-card *ngIf="isNoneState || isFinishedVotingState"></app-planning-participant-participants-card>

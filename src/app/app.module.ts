@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlanningHostComponent } from './planning/host/planning-host/planning-host.component';
-import { PlanningParticipantComponent } from './planning/planning-participant/planning-participant.component';
+import { PlanningParticipantComponent } from './planning/participant/planning-participant/planning-participant.component';
 import { LandingComponent } from './landing/landing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -28,6 +28,12 @@ import { PlanningHostParticipantsCardComponent } from './planning/host/planning-
 import { PlanningHostNoneStateCardComponent } from './planning/host/planning-host-none-state-card/planning-host-none-state-card.component';
 import { PlanningHostTicketCardComponent } from './planning/host/planning-host-ticket-card/planning-host-ticket-card.component';
 import { PlanningParticipantRowComponent } from './planning/shared/planning-participant-row/planning-participant-row.component';
+import { PlanningParticipantSetupComponent } from './planning/participant/planning-participant-setup/planning-participant-setup.component';
+import { PlanningParticipantLandingComponent } from './planning/participant/planning-participant-landing/planning-participant-landing.component';
+import { PlanningParticipantNoneStateCardComponent } from './planning/participant/planning-participant-none-state-card/planning-participant-none-state-card.component';
+import { PlanningParticipantVotingStateCardComponent } from './planning/participant/planning-participant-voting-state-card/planning-participant-voting-state-card.component';
+import { PlanningParticipantTicketCardComponent } from './planning/participant/planning-participant-ticket-card/planning-participant-ticket-card.component';
+import { PlanningParticipantParticipantsCardComponent } from './planning/participant/planning-participant-participants-card/planning-participant-participants-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,13 @@ import { PlanningParticipantRowComponent } from './planning/shared/planning-part
     PlanningHostParticipantsCardComponent,
     PlanningHostNoneStateCardComponent,
     PlanningHostTicketCardComponent,
-    PlanningParticipantRowComponent
+    PlanningParticipantRowComponent,
+    PlanningParticipantSetupComponent,
+    PlanningParticipantLandingComponent,
+    PlanningParticipantNoneStateCardComponent,
+    PlanningParticipantVotingStateCardComponent,
+    PlanningParticipantTicketCardComponent,
+    PlanningParticipantParticipantsCardComponent
   ],
   imports: [
     BrowserModule,
