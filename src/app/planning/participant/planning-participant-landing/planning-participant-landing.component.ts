@@ -109,7 +109,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
   }
 
   onClickVote(card: PlanningCard) {
-    var command = this.participantCommandMapper.mapLeaveSessionCommand(this.uuid)
+    var command = this.participantCommandMapper.mapVoteCommand(this.uuid, card)
     this.sendCommand(command)
   }
 
@@ -148,5 +148,6 @@ export class PlanningParticipantLandingComponent implements OnInit {
     this.sessionCode = stateMessage.sessionCode
     this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket
+    this.availableCards = stateMessage.availableCards
   }
 }

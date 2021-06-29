@@ -65,3 +65,13 @@ mat-card-content h2 {
     align-items: center;
     flex-grow: inherit;
 }
+
+.tile-image {
+    width: 95%;
+    height: auto;
+}
+
+.tile-image-selected {
+    border: 5px solid #A288E3;
+    border-radius: 20px;
+}

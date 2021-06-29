@@ -89,6 +89,50 @@ export class PlanningCardMapper {
         return value
     }
 
+    imageAssetPath(planningCard: PlanningCard): string {
+        var value: string = ""
+
+        switch (planningCard) {
+            case PlanningCard.zero:
+                value = "/assets/cards/Card 0.png"
+                break
+            case PlanningCard.one:
+                value = "/assets/cards/Card 1.png"
+                break
+            case PlanningCard.two:
+                value = "/assets/cards/Card 2.png"
+                break
+            case PlanningCard.three:
+                value = "/assets/cards/Card 3.png"
+                break
+            case PlanningCard.five:
+                value = "/assets/cards/Card 5.png"
+                break
+            case PlanningCard.eight:
+                value = "/assets/cards/Card 8.png"
+                break
+            case PlanningCard.thirteen:
+                value = "/assets/cards/Card 13.png"
+                break
+            case PlanningCard.twenty:
+                value = "/assets/cards/Card 20.png"
+                break
+            case PlanningCard.fourty:
+                value = "/assets/cards/Card 40.png"
+                break
+            case PlanningCard.hundred:
+                value = "/assets/cards/Card 100.png"
+                break
+            case PlanningCard.coffee:
+                value = "/assets/cards/Card Coffee.png"
+                break
+            case PlanningCard.question:
+                value = "/assets/cards/Card.png"
+                break
+        }
+        return value
+    }
+
     get allCases(): PlanningCard[] {
         return [
             PlanningCard.zero,
