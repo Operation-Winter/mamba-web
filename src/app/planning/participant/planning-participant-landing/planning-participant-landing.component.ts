@@ -63,6 +63,14 @@ export class PlanningParticipantLandingComponent implements OnInit {
     return this.state == PlanningSessionState.sessionEnded
   }
 
+  get isParticipantRemovedState() {
+    return this.state == PlanningSessionState.removeParticipant
+  }
+
+  get isInvalidSessionState() {
+    return this.state == PlanningSessionState.invalidSession
+  }
+
   constructor() {
     this.subscription = this.webSocketSubject.subscribe(
       msg => {
@@ -87,13 +95,13 @@ export class PlanningParticipantLandingComponent implements OnInit {
   }
 
   onClickLeaveSession() {
-    // var command = this.hostCommandMapper.mapEndSessionCommand(this.uuid)
-    // this.sendCommand(command)
+    var command = this.participantCommandMapper.mapLeaveSessionCommand(this.uuid)
+    this.sendCommand(command)
   }
 
   onClickVote(card: PlanningCard) {
-    // var command = this.hostCommandMapper.mapRevoteCommand(this.uuid)
-    // this.sendCommand(command)
+    var command = this.participantCommandMapper.mapLeaveSessionCommand(this.uuid)
+    this.sendCommand(command)
   }
 
   execute(command: PlanningCommandParticipantReceive) {
@@ -115,10 +123,13 @@ export class PlanningParticipantLandingComponent implements OnInit {
         this.state = PlanningSessionState.error
         break
       case PlanningCommandParticipantReceiveType.endSession:
+        this.state = PlanningSessionState.sessionEnded
         break
       case PlanningCommandParticipantReceiveType.removeParticipant:
+        this.state = PlanningSessionState.removeParticipant
         break
       case PlanningCommandParticipantReceiveType.invalidSession:
+        this.state = PlanningSessionState.invalidSession
         break
     }
   }

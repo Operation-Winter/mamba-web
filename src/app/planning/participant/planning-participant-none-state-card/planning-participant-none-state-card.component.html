@@ -1,3 +1,14 @@
-<p>
-  planning-participant-none-state-card works!
-</p>
+<mat-card class="product-card">
+  <mat-card-content>
+    <mat-card-title>{{sessionName}}</mat-card-title>
+    <mat-card-subtitle>Welcome. No ticket has been added yet by the host.</mat-card-subtitle>
+
+    <h2>Session code</h2>
+    <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickLeaveSession()">
+      End session
+    </button>
+  </mat-card-actions>
+</mat-card>

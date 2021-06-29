@@ -1,3 +1,10 @@
-<p>
-  planning-participant-ticket-card works!
-</p>
+<mat-card class="product-card">
+  <app-planning-landing-ticket-card-content [sessionName]="sessionName" [sessionCode]="sessionCode"
+    [ticketTitle]="ticketTitle" [ticketDescription]="ticketDescription">
+  </app-planning-landing-ticket-card-content>
+  <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickLeaveSession()">
+      Leave session
+    </button>
+  </mat-card-actions>
+</mat-card>

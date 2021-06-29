@@ -1,6 +1,7 @@
 import { PlanningInvalidCommandMessage } from "../models/messages/planning-invalid-command-message"
 import { PlanningJoinSessionMessage } from "../models/messages/planning-join-session-message"
 import { PlanningSessionStateMessage } from "../models/messages/planning-session-state-message"
+import { PlanningVoteMessage } from "../models/messages/planning-vote-message"
 import { PlanningCommandParticipantReceive } from "../models/participant/planning-command-participant-receive"
 import { PlanningCommandParticipantReceiveType } from "../models/participant/planning-command-participant-receive-type.enum"
 import { PlanningCommandParticipantSend } from "../models/participant/planning-command-participant-send"
@@ -11,6 +12,19 @@ export class PlanningParticipantCommandMapper {
     mapJoinSessionCommand(uuid: string, sessionCode: string, participantName: string): PlanningCommandParticipantSend {
         var message = new PlanningJoinSessionMessage(sessionCode, participantName)
         return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.joinSession, message)
+    }
+
+    mapLeaveSessionCommand(uuid: string): PlanningCommandParticipantSend {
+        return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.leaveSession, null)
+    }
+
+    mapVoteCommand(uuid: string, selectedCard: PlanningCard): PlanningCommandParticipantSend {
+        var message = new PlanningVoteMessage(selectedCard)
+        return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.vote, message)
+    }
+
+    mapReconnectCommand(uuid: string): PlanningCommandParticipantSend {
+        return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.reconnect, null)
     }
 
     mapIncomingCommand(command: any): PlanningCommandParticipantReceive {
@@ -26,11 +40,7 @@ export class PlanningParticipantCommandMapper {
             case PlanningCommandParticipantReceiveType.invalidCommand:
                 message = command.message as PlanningInvalidCommandMessage
                 break
-            case PlanningCommandParticipantReceiveType.invalidSession:
-                break
-            case PlanningCommandParticipantReceiveType.removeParticipant:
-                break
-            case PlanningCommandParticipantReceiveType.endSession:
+            default:
                 break
         }
 

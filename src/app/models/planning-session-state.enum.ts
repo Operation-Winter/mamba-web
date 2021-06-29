@@ -3,5 +3,7 @@ export enum PlanningSessionState {
     voting,
     finishedVoting,
     error,
-    sessionEnded
+    sessionEnded,
+    removeParticipant,
+    invalidSession
 }
