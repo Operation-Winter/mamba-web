@@ -1,0 +1,29 @@
+<app-planning-participant-none-state-card [sessionName]="sessionName" [sessionCode]="sessionCode"
+  (didTapLeaveSession)="onClickLeaveSession()" *ngIf="isNoneState">
+</app-planning-participant-none-state-card>
+
+<app-planning-participant-ticket-card [sessionName]="sessionName" [sessionCode]="sessionCode"
+  [ticketTitle]="ticket!.title" [ticketDescription]="ticket!.description" (didTapLeaveSession)="onClickLeaveSession()"
+  *ngIf="isVotingState || isFinishedVotingState">
+</app-planning-participant-ticket-card>
+
+<app-planning-participant-voting-state-card [availableCards]="availableCards" (didTapPlanningCard)="onClickVote($event)"
+  *ngIf="isVotingState"></app-planning-participant-voting-state-card>
+
+<app-planning-error-state-card [sessionName]="sessionName" *ngIf="isErrorState"></app-planning-error-state-card>
+
+<app-planning-session-ended-card [sessionName]="sessionName" *ngIf="isSessionEndedState">
+</app-planning-session-ended-card>
+
+<app-planning-participant-left-session-card [sessionName]="sessionName" *ngIf="isParticipantLeftState"></app-planning-participant-left-session-card>
+
+<app-planning-participant-removed-state-card [sessionName]="sessionName" *ngIf="isParticipantRemovedState">
+</app-planning-participant-removed-state-card>
+
+<app-planning-participant-invalid-session-state-card *ngIf="isInvalidSessionState">
+</app-planning-participant-invalid-session-state-card>
+
+<app-planning-participant-participants-card [participants]="participants" [ticket]="ticket"
+  [isFinishedVotingState]="isFinishedVotingState" [isVotingState]="isVotingState"
+  *ngIf="isNoneState || isVotingState || isFinishedVotingState">
+</app-planning-participant-participants-card>

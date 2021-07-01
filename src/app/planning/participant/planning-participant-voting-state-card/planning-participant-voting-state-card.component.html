@@ -1,0 +1,10 @@
+<mat-card class="product-card">
+  <mat-card-content>
+    <mat-grid-list cols="6" rowHeight="285:445">
+      <mat-grid-tile *ngFor="let availableCard of availableCards">
+        <img [src]="planningCardImagePath(availableCard)" (click)="onClickPlanningCard(availableCard)"
+          [ngClass]="{'tile-image': true, 'tile-image-selected': isSelected(availableCard)}">
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

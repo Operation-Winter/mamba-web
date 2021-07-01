@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.product-card {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #E5E5EA;
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+}
+
+.product-card mat-card-title {
+    color: #A288E3;
+}
+
+.product-card .mat-form-field-outline {
+    background-color: #D1D1D6;
+}
+
+.product-card mat-form-field {
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.product-card .mat-pseudo-checkbox {
+    background: #A288E3;
+    border-color: #38023B;
+}
+
+.purple-button {
+    background-color: #A288E3;
+    color: #E5E5EA;
+    width: 100%;
+}
+
+.purple-button-command {
+    background-color: #A288E3;
+    color: #E5E5EA;
+}
+
+mat-card-content h2 {
+    color: #A288E3;
+}
+
+.right-align {
+    justify-content: flex-end !important;
+}
+
+.left-align {
+    justify-content: flex-start !important;
+}
+
+.mat-card-actions:not(.mat-card-actions-align-end) .mat-button:first-child, .mat-card-actions:not(.mat-card-actions-align-end) .mat-raised-button:first-child, .mat-card-actions:not(.mat-card-actions-align-end) .mat-stroked-button:first-child {
+    margin: 0px 8px !important;
+}
+
+.mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text {
+    flex-direction: row !important;
+    align-items: center;
+    flex-grow: inherit;
+}
+
+.tile-image {
+    width: 95%;
+    height: auto;
+}
+
+.tile-image-selected {
+    border: 5px solid #A288E3;
+    border-radius: 20px;
+}

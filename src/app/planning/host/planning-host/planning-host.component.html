@@ -1,0 +1,21 @@
+<div *ngIf="!sessionStarted">
+  <ng-container *ngTemplateOutlet="setup"></ng-container>
+</div>
+<div *ngIf="sessionStarted">
+  <ng-container *ngTemplateOutlet="landing"></ng-container>
+</div>
+
+<ng-template #setup>
+  <app-planning-host-setup
+    [(sessionName)]="sessionName"
+    [(selectedAvailableCards)]="selectedAvailableCards"
+    (startSessionTapped)="didTapStartSession()"
+  ></app-planning-host-setup>
+</ng-template>
+
+<ng-template #landing>
+  <app-planning-host-landing
+    [sessionName]="sessionName"
+    [availableCards]="availableCards"
+  ></app-planning-host-landing>
+</ng-template>

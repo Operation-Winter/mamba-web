@@ -1,0 +1,11 @@
+<mat-card class="product-card">
+  <mat-card-content>
+    <mat-card-title>Participants</mat-card-title>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-selection-list #participantsList [multiple]="false">
+      <app-planning-participant-row *ngFor="let participant of participants" [participant]="participant"
+        [isFinishedVotingState]="isFinishedVotingState" [isVotingState]="isVotingState" [ticket]="ticket"></app-planning-participant-row>
+    </mat-selection-list>
+  </mat-card-actions>
+</mat-card>
