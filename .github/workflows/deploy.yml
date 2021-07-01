@@ -24,10 +24,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and npm run build
+      - name: npm install and ng build
         run: |
           npm i
-          npm run build:prod
+          ng build --prod
       - name: Add SSH key
         uses: kielabokkie/ssh-key-and-known-hosts-action@v1
         with:
