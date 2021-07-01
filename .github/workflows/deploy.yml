@@ -28,12 +28,11 @@ jobs:
         run: |
           npm i
           npm run build --prod
-
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzr --delete
-          path: dist/
+          path: dist/mamba/
           remote_path: /var/www/html/
           remote_host: ${{ secrets.DEPLOY_SERVER_ADDRESS }}
           remote_user: ${{ secrets.DEPLOY_SERVER_USERNAME }}
