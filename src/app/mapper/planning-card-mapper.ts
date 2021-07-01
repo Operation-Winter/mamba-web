@@ -131,11 +131,7 @@ export class PlanningCardMapper {
                 value = "/assets/cards/Card.png"
                 break
         }
-        if (isDevMode()) {
-            return value
-        } else {
-            return "/mamba-web" + value
-        }
+        return value
     }
 
     get allCases(): PlanningCard[] {
