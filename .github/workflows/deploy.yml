@@ -28,13 +28,13 @@ jobs:
         run: |
           npm i
           npm run build --prod
-      - name: Add SSH key
-        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          ssh-host: ${{ secrets.DEPLOY_SERVER_ADDRESS }}
-      - name: Deploy with rsync
-        env:
-          DEPLOY_SERVER_ADDRESS: ${{ secrets.DEPLOY_SERVER_ADDRESS }}
-        run: |
-          rsync -avhz -delete dist ${{ secrets.DEPLOY_SERVER_USERNAME }}@${{ secrets.DEPLOY_SERVER_ADDRESS }}:var/www/html
+          switches: -avzr --delete
+          path: dist/
+          remote_path: /var/www/html/
+          remote_host: ${{ secrets.DEPLOY_SERVER_ADDRESS }}
+          remote_user: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          remote_key: ${{ secrets.DEPLOY_SERVER_KEY }}
