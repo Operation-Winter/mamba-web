@@ -83,18 +83,29 @@ export class PlanningParticipantLandingComponent implements OnInit {
         let incomingCommand = this.participantCommandMapper.mapIncomingCommand(jsonObject)
         this.execute(incomingCommand)
       },
-      err => console.log(err),
+      err => {
+        this.state = PlanningSessionState.error
+        console.log(err)
+      },
       () => {
         if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession 
           && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant)
           this.state = PlanningSessionState.sessionEnded
       }
     )
+
+    setInterval(() => {
+      this.ping()
+    }, 10000)
   }
 
   ngOnInit() {
     var command = this.participantCommandMapper.mapJoinSessionCommand(this.uuid, this.sessionCode, this.userName)
     this.sendCommand(command)
+  }
+
+  ping() {
+    this.webSocketSubject.next(new Uint8Array())
   }
 
   sendCommand(command: PlanningCommandParticipantSend) {

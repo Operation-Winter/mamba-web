@@ -72,14 +72,25 @@ export class PlanningHostLandingComponent implements OnInit {
         let incomingCommand = this.hostCommandMapper.mapIncomingCommand(jsonObject)
         this.execute(incomingCommand)
       },
-      err => console.log(err),
+      err => {
+        this.state = PlanningSessionState.error
+        console.log(err)
+      },
       () => this.state = PlanningSessionState.sessionEnded
     )
+
+    setInterval(() => {
+      this.ping()
+    }, 10000)
   }
 
   ngOnInit() {
     var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.availableCards)
     this.sendCommand(command)
+  }
+
+  ping() {
+    this.webSocketSubject.next(new Uint8Array())
   }
 
   sendCommand(command: PlanningCommandHostSend) {
