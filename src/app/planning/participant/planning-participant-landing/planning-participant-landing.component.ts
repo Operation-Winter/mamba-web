@@ -77,6 +77,10 @@ export class PlanningParticipantLandingComponent implements OnInit {
   }
 
   constructor() {
+    this.connect()
+  }
+
+  connect() {
     this.subscription = this.webSocketSubject.subscribe(
       msg => {
         let jsonObject = JSON.parse(new TextDecoder().decode(msg))
@@ -88,24 +92,19 @@ export class PlanningParticipantLandingComponent implements OnInit {
         console.log(err)
       },
       () => {
-        if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession 
-          && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant)
+        if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession
+          && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant) {
           this.state = PlanningSessionState.sessionEnded
+        } else {
+          this.connect()
+        }
       }
     )
-
-    setInterval(() => {
-      this.ping()
-    }, 10000)
   }
 
   ngOnInit() {
     var command = this.participantCommandMapper.mapJoinSessionCommand(this.uuid, this.sessionCode, this.userName)
     this.sendCommand(command)
-  }
-
-  ping() {
-    this.webSocketSubject.next(new Uint8Array())
   }
 
   sendCommand(command: PlanningCommandParticipantSend) {

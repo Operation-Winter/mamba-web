@@ -66,6 +66,10 @@ export class PlanningHostLandingComponent implements OnInit {
   }
 
   constructor(public dialog: MatDialog) {
+    this.connect()
+  }
+
+  connect() {
     this.subscription = this.webSocketSubject.subscribe(
       msg => {
         let jsonObject = JSON.parse(new TextDecoder().decode(msg))
@@ -76,21 +80,20 @@ export class PlanningHostLandingComponent implements OnInit {
         this.state = PlanningSessionState.error
         console.log(err)
       },
-      () => this.state = PlanningSessionState.sessionEnded
+      () => {
+        if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession
+          && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant) {
+          this.state = PlanningSessionState.sessionEnded
+        } else {
+          this.connect()
+        }
+      }
     )
-
-    setInterval(() => {
-      this.ping()
-    }, 10000)
   }
 
   ngOnInit() {
     var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.availableCards)
     this.sendCommand(command)
-  }
-
-  ping() {
-    this.webSocketSubject.next(new Uint8Array())
   }
 
   sendCommand(command: PlanningCommandHostSend) {
