@@ -34,7 +34,7 @@ export class PlanningHostLandingComponent implements OnInit {
     },
     deserializer: msg => new Uint8Array(msg.data as ArrayBuffer)
   })
-  subscription: Subscription
+  subscription: Subscription | undefined
 
   uuid = UUID.UUID()
   @Input() sessionName: string = ""

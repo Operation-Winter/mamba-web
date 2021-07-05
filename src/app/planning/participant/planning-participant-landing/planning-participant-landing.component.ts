@@ -31,7 +31,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
     },
     deserializer: msg => new Uint8Array(msg.data as ArrayBuffer)
   })
-  subscription: Subscription
+  subscription: Subscription | undefined
 
   uuid = UUID.UUID()
 
