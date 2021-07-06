@@ -44,6 +44,7 @@ export class PlanningHostLandingComponent implements OnInit {
   sessionCode: string = ""
   participants: PlanningParticipant[] = []
   ticket: PlanningTicket | undefined
+  retryCount = 0
 
   get isNoneState() {
     return this.state == PlanningSessionState.none
@@ -85,7 +86,14 @@ export class PlanningHostLandingComponent implements OnInit {
           && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant) {
           this.state = PlanningSessionState.sessionEnded
         } else {
-          this.connect()
+          this.retryCount += 1
+          
+          if (this.retryCount > 3) {
+            this.state = PlanningSessionState.error
+          } else {
+            this.connect()
+            this.sendCommand(this.hostCommandMapper.mapReconnectCommand(this.uuid))
+          }
         }
       }
     )

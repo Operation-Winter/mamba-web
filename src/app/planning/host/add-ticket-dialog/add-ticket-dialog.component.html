@@ -4,13 +4,14 @@
 
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="data.title" name="title" required placeholder="Enter the ticket title">
+    <input matInput [(ngModel)]="data.title" name="title" required placeholder="Enter the ticket title"
+      autocomplete="off">
   </mat-form-field>
-  <br/>
+  <br />
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Description</mat-label>
-    <textarea matInput [(ngModel)]="data.description" name="description"
-      placeholder="Enter the ticket description"></textarea>
+    <textarea matInput [(ngModel)]="data.description" name="description" placeholder="Enter the ticket description"
+      autocomplete="off"></textarea>
   </mat-form-field>
 
 </div>
