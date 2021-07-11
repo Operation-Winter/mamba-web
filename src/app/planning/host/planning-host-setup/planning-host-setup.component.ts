@@ -13,6 +13,7 @@ export class PlanningHostSetupComponent implements OnInit {
   startSessionDisabled: boolean = true
   selectedAvailableCardValues: string[] = this.availableCards
   sessionNameValue: string = ""
+  panelOpenState = false
 
   @Input()
   get selectedAvailableCards() {
@@ -47,5 +48,23 @@ export class PlanningHostSetupComponent implements OnInit {
 
   onClickStartSession() {
     this.startSessionTapped.next(true)
+  }
+
+  onClickPlanningCard(planningCard: PlanningCard) {
+    var selectedCards = this.selectedAvailableCards
+    if (selectedCards.includes(planningCard)) {
+      selectedCards = selectedCards.filter(card => card != planningCard)
+    } else {
+      selectedCards.push(planningCard)
+    }
+    this.selectedAvailableCards = selectedCards
+  }
+
+  planningCardImagePath(planningCard: PlanningCard): string {
+    return this.planningCardMapper.imageAssetPath(planningCard)
+  }
+
+  isSelected(planningCard: PlanningCard): boolean {
+    return this.selectedAvailableCardValues.includes(planningCard)
   }
 }

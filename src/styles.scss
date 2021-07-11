@@ -75,3 +75,22 @@ mat-card-content h2 {
     border: 5px solid #A288E3;
     border-radius: 20px;
 }
+
+.overlay {
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.tertiary-color {
+    color: #CEFDFF;
+}
+
+.secondary-grey {
+    color: #D1D1D6;
+}
+
+.secondary-grey-background {
+    background-color: #D1D1D6;
+}

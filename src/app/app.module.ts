@@ -21,6 +21,7 @@ import { PlanningHostSetupComponent } from './planning/host/planning-host-setup/
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddTicketDialogComponent } from './planning/host/add-ticket-dialog/add-ticket-dialog.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { PlanningErrorStateCardComponent } from './planning/shared/planning-error-state-card/planning-error-state-card.component';
 import { PlanningLandingTicketCardContentComponent } from './planning/shared/planning-landing-ticket-card-content/planning-landing-ticket-card-content.component';
 import { PlanningSessionEndedCardComponent } from './planning/shared/planning-session-ended-card/planning-session-ended-card.component';
@@ -78,7 +79,8 @@ import { PlanningParticipantLeftSessionCardComponent } from './planning/particip
     MatInputModule,
     FormsModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
