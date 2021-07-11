@@ -15,10 +15,16 @@ export class PlanningHostComponent implements OnInit {
   }
   sessionName: string = ""
   sessionStarted: boolean = false
+  shouldReconnect: boolean = false
+
+  get uuid() {
+    return sessionStorage.getItem('hostUUID')
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    this.shouldReconnect = this.uuid != null
   }
 
   didTapStartSession() {

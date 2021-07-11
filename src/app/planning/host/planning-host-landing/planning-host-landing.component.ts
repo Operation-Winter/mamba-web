@@ -36,10 +36,29 @@ export class PlanningHostLandingComponent implements OnInit {
   })
   subscription: Subscription | undefined
 
-  uuid = UUID.UUID()
+  get uuid(): string {
+    var tempUUID = this.hostUUID
+
+    if (tempUUID == null) {
+      tempUUID = this.sessionUUID
+    }
+    if (tempUUID == null) {
+      tempUUID = UUID.UUID()
+      this.hostUUID = tempUUID
+      sessionStorage.setItem('hostUUID', tempUUID)
+    }
+    return tempUUID
+  }
+
+  get sessionUUID() {
+    return sessionStorage.getItem('hostUUID')
+  }
+
   @Input() sessionName: string = ""
   @Input() availableCards: PlanningCard[] = []
+  @Input() reconnect: boolean = false
 
+  hostUUID: string | null = null
   state = PlanningSessionState.none
   sessionCode: string = ""
   participants: PlanningParticipant[] = []
@@ -81,27 +100,42 @@ export class PlanningHostLandingComponent implements OnInit {
         this.state = PlanningSessionState.error
         console.log(err)
       },
-      () => {
-        if (this.state != PlanningSessionState.error && this.state != PlanningSessionState.invalidSession
-          && this.state != PlanningSessionState.participantLeft && this.state != PlanningSessionState.removeParticipant) {
-          this.state = PlanningSessionState.sessionEnded
-        } else {
-          this.retryCount += 1
-          
-          if (this.retryCount > 3) {
-            this.state = PlanningSessionState.error
-          } else {
-            this.connect()
-            this.sendCommand(this.hostCommandMapper.mapReconnectCommand(this.uuid))
-          }
-        }
-      }
+      () => this.handleSocketClosure()
     )
   }
 
+  handleSocketClosure() {
+    switch (this.state) {
+      case PlanningSessionState.none:
+      case PlanningSessionState.voting:
+      case PlanningSessionState.finishedVoting:
+      case PlanningSessionState.error:
+        this.tryReconnect()
+        break
+      default: 
+        break
+    }
+  }
+
+  tryReconnect() {
+    this.retryCount += 1
+          
+    if (this.retryCount > 3) {
+      this.state = PlanningSessionState.error
+    } else {
+      this.connect()
+      this.sendCommand(this.hostCommandMapper.mapReconnectCommand(this.uuid))
+    }
+  }
+
   ngOnInit() {
-    var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.availableCards)
-    this.sendCommand(command)
+    if (this.reconnect) {
+      var command = this.hostCommandMapper.mapReconnectCommand(this.uuid)
+      this.sendCommand(command)
+    } else {
+      var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.availableCards)
+      this.sendCommand(command)
+    }
   }
 
   sendCommand(command: PlanningCommandHostSend) {
@@ -113,7 +147,7 @@ export class PlanningHostLandingComponent implements OnInit {
   onClickAddTicket() {
     const dialogRef = this.dialog.open(AddTicketDialogComponent, {
       minWidth: '400px',
-      maxWidth: '600px',
+      maxWidth: '800px',
       data: new PlanningAddTicketMessage("", "")
     })
 
@@ -130,6 +164,7 @@ export class PlanningHostLandingComponent implements OnInit {
 
   onClickEndSession() {
     var command = this.hostCommandMapper.mapEndSessionCommand(this.uuid)
+    this.resetUUID()
     this.sendCommand(command)
   }
 
@@ -170,8 +205,13 @@ export class PlanningHostLandingComponent implements OnInit {
   }
 
   assignStateMessage(stateMessage: PlanningSessionStateMessage) {
+    this.sessionName = stateMessage.sessionName
     this.sessionCode = stateMessage.sessionCode
     this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket
+  }
+
+  resetUUID() {
+    sessionStorage.removeItem('hostUUID')
   }
 }

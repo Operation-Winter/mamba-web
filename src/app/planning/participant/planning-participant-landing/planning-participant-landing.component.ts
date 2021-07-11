@@ -37,11 +37,18 @@ export class PlanningParticipantLandingComponent implements OnInit {
     var tempUUID = this.participantUUID
 
     if (tempUUID == null) {
+      tempUUID = this.sessionUUID
+    }
+    if (tempUUID == null) {
       tempUUID = UUID.UUID()
       this.participantUUID = tempUUID
       sessionStorage.setItem('participantUUID', tempUUID)
     }
     return tempUUID
+  }
+
+  get sessionUUID() {
+    return sessionStorage.getItem('participantUUID')
   }
 
   @Input() userName: string = ""

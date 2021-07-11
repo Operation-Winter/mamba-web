@@ -1,7 +1,7 @@
-<div *ngIf="!sessionStarted">
+<div *ngIf="!sessionStarted && !shouldReconnect">
   <ng-container *ngTemplateOutlet="setup"></ng-container>
 </div>
-<div *ngIf="sessionStarted">
+<div *ngIf="sessionStarted || shouldReconnect">
   <ng-container *ngTemplateOutlet="landing"></ng-container>
 </div>
 
@@ -17,5 +17,6 @@
   <app-planning-host-landing
     [sessionName]="sessionName"
     [availableCards]="availableCards"
+    [reconnect]="shouldReconnect"
   ></app-planning-host-landing>
 </ng-template>
