@@ -9,10 +9,18 @@ export class PlanningParticipantComponent implements OnInit {
   sessionJoined: boolean = false
   sessionCode: string = ""
   userName: string = ""
+  shouldReconnect: boolean = false
+
+  get uuid() {
+    return sessionStorage.getItem('participantUUID')
+  }
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.uuid != null) {
+      this.shouldReconnect = true
+    }
   }
 
   didTapJoinSession() {

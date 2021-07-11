@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -7,8 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onClickHost() {
+    sessionStorage.removeItem('hostUUID')
+    this.router.navigate(['/planning/host'])
+  }
+
+  onClickJoin() {
+    sessionStorage.removeItem('participantUUID')
+    this.router.navigate(['/planning/participant'])
   }
 }

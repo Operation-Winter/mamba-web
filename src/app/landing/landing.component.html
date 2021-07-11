@@ -8,8 +8,8 @@
     </mat-card-content>
     <mat-card-actions>
         <mat-list role="navigation">
-            <mat-list-item routerLink="planning/host"><button mat-raised-button class="purple-button">Host a session</button></mat-list-item>
-            <mat-list-item routerLink="planning/participant"><button mat-raised-button class="purple-button">Join a session</button></mat-list-item>
+            <mat-list-item><button mat-raised-button class="purple-button" (click)="onClickHost()">Host a session</button></mat-list-item>
+            <mat-list-item><button mat-raised-button class="purple-button" (click)="onClickJoin()">Join a session</button></mat-list-item>
         </mat-list>
     </mat-card-actions>
 </mat-card>

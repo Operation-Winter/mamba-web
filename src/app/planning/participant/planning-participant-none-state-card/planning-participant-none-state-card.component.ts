@@ -16,6 +16,6 @@ export class PlanningParticipantNoneStateCardComponent implements OnInit {
   }
 
   onClickLeaveSession() {
-    
+    this.didTapLeaveSession.emit()
   }
 }

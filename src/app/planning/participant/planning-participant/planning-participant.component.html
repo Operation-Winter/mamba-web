@@ -1,17 +1,24 @@
-<div *ngIf="!sessionJoined">
-    <ng-container *ngTemplateOutlet="setup"></ng-container>
+<div *ngIf="!sessionJoined && !shouldReconnect">
+  <ng-container *ngTemplateOutlet="setup"></ng-container>
 </div>
-<div *ngIf="sessionJoined">
-    <ng-container *ngTemplateOutlet="landing"></ng-container>
+<div *ngIf="sessionJoined || shouldReconnect">
+  <ng-container *ngTemplateOutlet="landing"></ng-container>
 </div>
 
 <ng-template #setup>
-    <app-planning-participant-setup [(sessionCode)]="sessionCode" [(userName)]="userName"
-        (joinSessionTapped)="didTapJoinSession()">
-        </app-planning-participant-setup>
+  <app-planning-participant-setup
+    [(sessionCode)]="sessionCode"
+    [(userName)]="userName"
+    (joinSessionTapped)="didTapJoinSession()"
+  >
+  </app-planning-participant-setup>
 </ng-template>
 
 <ng-template #landing>
-    <app-planning-participant-landing [sessionCode]="sessionCode" [userName]="userName">
-    </app-planning-participant-landing>
+  <app-planning-participant-landing
+    [sessionCode]="sessionCode"
+    [userName]="userName"
+    [reconnect]="shouldReconnect"
+  >
+  </app-planning-participant-landing>
 </ng-template>
