@@ -39,6 +39,7 @@ import { PlanningParticipantRemovedStateCardComponent } from './planning/partici
 import { PlanningParticipantInvalidSessionStateCardComponent } from './planning/participant/planning-participant-invalid-session-state-card/planning-participant-invalid-session-state-card.component';
 import { PlanningParticipantLeftSessionCardComponent } from './planning/participant/planning-participant-left-session-card/planning-participant-left-session-card.component';
 import { PlanningVotingResultsCardComponent } from './planning/shared/planning-voting-results-card/planning-voting-results-card.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { PlanningVotingResultsCardComponent } from './planning/shared/planning-v
     FormsModule,
     MatDialogModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

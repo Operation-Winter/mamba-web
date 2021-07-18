@@ -66,6 +66,13 @@ mat-card-content h2 {
     flex-grow: inherit;
 }
 
+.inline-content {
+    display: inline-flex;
+    flex-direction: row !important;
+    align-items: center;
+    flex-grow: inherit;
+}
+
 .tile-image {
     width: 95%;
     height: auto;
@@ -93,4 +100,8 @@ mat-card-content h2 {
 
 .secondary-grey-background {
     background-color: #D1D1D6;
+}
+
+.spacer {
+    flex: 1 1 auto;
 }

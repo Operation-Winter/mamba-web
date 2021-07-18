@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-planning-host-none-state-card',
@@ -10,6 +11,10 @@ export class PlanningHostNoneStateCardComponent implements OnInit {
   @Input() sessionCode: string = ""
   @Output() didTapAddTicket = new EventEmitter<void>()
   @Output() didTapEndSession = new EventEmitter<void>()
+
+  get sessionURL(): string {
+    return environment.baseWebURL + "/planning/participant?sessionCode=" + this.sessionCode
+  }
 
   constructor() { }
 

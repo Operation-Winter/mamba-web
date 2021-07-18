@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-planning-host-ticket-card',
@@ -16,6 +17,10 @@ export class PlanningHostTicketCardComponent implements OnInit {
   @Output() didTapEndSession = new EventEmitter<string>()
   @Output() didTapRevote = new EventEmitter<string>()
   @Output() didTapAddTicket = new EventEmitter<string>()
+
+  get sessionURL(): string {
+    return environment.baseWebURL + "/planning/participant?sessionCode=" + this.sessionCode
+  }
 
   constructor() { }
 

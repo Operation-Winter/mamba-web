@@ -38,5 +38,6 @@ export class PlanningParticipantSetupComponent implements OnInit {
 
   onClickJoinSession() {
     this.joinSessionTapped.next(true)
+    localStorage.setItem('userName', this.userName)
   }
 }

@@ -1,6 +1,12 @@
 <mat-toolbar>
   <img src="../assets/App Icon.png" style="border-radius: 10px; height: 50px; width: 50px;">
   <button mat-button routerLink="/"><h1> Mamba</h1></button>
+  <span class="spacer"></span>
+  <div *ngIf="userName != null" class="inline-content">
+    <mat-icon mat-list-icon>account_circle</mat-icon>
+    <span style="padding-left: 10px;"></span>
+    {{userName}}
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

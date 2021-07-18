@@ -2,6 +2,7 @@
   <app-planning-landing-ticket-card-content [sessionName]="sessionName" [sessionCode]="sessionCode"
     [ticketTitle]="ticketTitle" [ticketDescription]="ticketDescription">
   </app-planning-landing-ticket-card-content>
+  <button mat-raised-button  [cdkCopyToClipboard]="sessionURL">Copy share session URL</button>
   <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
       Add ticket

@@ -1,7 +1,7 @@
-<div *ngIf="!sessionJoined && !shouldReconnect">
+<div *ngIf="!sessionJoined && !shouldReconnect && !shouldAutoConnect">
   <ng-container *ngTemplateOutlet="setup"></ng-container>
 </div>
-<div *ngIf="sessionJoined || shouldReconnect">
+<div *ngIf="sessionJoined || shouldReconnect || shouldAutoConnect">
   <ng-container *ngTemplateOutlet="landing"></ng-container>
 </div>
 
