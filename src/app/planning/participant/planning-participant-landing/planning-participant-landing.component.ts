@@ -3,6 +3,7 @@ import { UUID } from 'angular2-uuid';
 import { Subscription } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import { PlanningParticipantCommandMapper } from 'src/app/mapper/planning-participant-command-mapper';
+import { PlanningPartitipantsMapper } from 'src/app/mapper/planning-partitipants-mapper';
 import { PlanningSessionStateMessage } from 'src/app/models/messages/planning-session-state-message';
 import { PlanningCommandParticipantReceive } from 'src/app/models/participant/planning-command-participant-receive';
 import { PlanningCommandParticipantReceiveType } from 'src/app/models/participant/planning-command-participant-receive-type.enum';
@@ -171,15 +172,15 @@ export class PlanningParticipantLandingComponent implements OnInit {
     switch (command.type) {
       case PlanningCommandParticipantReceiveType.noneState:
         this.state = PlanningSessionState.none
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, false)
         break
       case PlanningCommandParticipantReceiveType.votingState:
         this.state = PlanningSessionState.voting
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, false)
         break
       case PlanningCommandParticipantReceiveType.finishedState:
         this.state = PlanningSessionState.finishedVoting
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, true)
         break
       case PlanningCommandParticipantReceiveType.invalidCommand:
         this.state = PlanningSessionState.error
@@ -199,12 +200,14 @@ export class PlanningParticipantLandingComponent implements OnInit {
     }
   }
 
-  assignStateMessage(stateMessage: PlanningSessionStateMessage) {
+  assignStateMessage(stateMessage: PlanningSessionStateMessage, sortParticipants: boolean) {
     this.sessionName = stateMessage.sessionName
     this.sessionCode = stateMessage.sessionCode
-    this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket
     this.availableCards = stateMessage.availableCards
+    this.participants = sortParticipants
+      ? PlanningPartitipantsMapper.sortedPartitipantsRows(stateMessage.ticket?.ticketVotes, stateMessage.participants)
+      : stateMessage.participants
   }
 
   resetUUID() {

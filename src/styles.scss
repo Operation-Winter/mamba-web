@@ -6,7 +6,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .product-card {
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 20px;
     background-color: #E5E5EA;
     -webkit-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
@@ -104,4 +104,10 @@ mat-card-content h2 {
 
 .spacer {
     flex: 1 1 auto;
+}
+
+.highlighted-participant-row {
+    border: 5px solid #A288E3;
+    border-radius: 10px;
+    margin: -5px;
 }

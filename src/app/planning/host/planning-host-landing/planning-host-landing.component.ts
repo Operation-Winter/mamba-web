@@ -15,6 +15,7 @@ import { PlanningAddTicketMessage } from 'src/app/models/messages/planning-add-t
 import { AddTicketDialogComponent } from '../add-ticket-dialog/add-ticket-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
+import { PlanningPartitipantsMapper } from 'src/app/mapper/planning-partitipants-mapper';
 
 @Component({
   selector: 'app-planning-host-landing',
@@ -112,14 +113,14 @@ export class PlanningHostLandingComponent implements OnInit {
       case PlanningSessionState.error:
         this.tryReconnect()
         break
-      default: 
+      default:
         break
     }
   }
 
   tryReconnect() {
     this.retryCount += 1
-          
+
     if (this.retryCount > 3) {
       this.state = PlanningSessionState.error
     } else {
@@ -188,15 +189,15 @@ export class PlanningHostLandingComponent implements OnInit {
     switch (command.type) {
       case PlanningCommandHostReceiveType.noneState:
         this.state = PlanningSessionState.none
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, false)
         break
       case PlanningCommandHostReceiveType.votingState:
         this.state = PlanningSessionState.voting
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, false)
         break
       case PlanningCommandHostReceiveType.finishedState:
         this.state = PlanningSessionState.finishedVoting
-        this.assignStateMessage(command.message as PlanningSessionStateMessage)
+        this.assignStateMessage(command.message as PlanningSessionStateMessage, true)
         break
       case PlanningCommandHostReceiveType.invalidCommand:
         this.state = PlanningSessionState.error
@@ -204,11 +205,13 @@ export class PlanningHostLandingComponent implements OnInit {
     }
   }
 
-  assignStateMessage(stateMessage: PlanningSessionStateMessage) {
+  assignStateMessage(stateMessage: PlanningSessionStateMessage, sortParticipants: boolean) {
     this.sessionName = stateMessage.sessionName
     this.sessionCode = stateMessage.sessionCode
-    this.participants = stateMessage.participants
     this.ticket = stateMessage.ticket
+    this.participants = sortParticipants
+      ? PlanningPartitipantsMapper.sortedPartitipantsRows(stateMessage.ticket?.ticketVotes, stateMessage.participants)
+      : stateMessage.participants
   }
 
   resetUUID() {

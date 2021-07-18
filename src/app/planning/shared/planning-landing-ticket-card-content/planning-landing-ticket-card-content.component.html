@@ -4,7 +4,9 @@
   <h2>Session code</h2>
   <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
 
-  <h2>Ticket</h2>
+  <button mat-raised-button [cdkCopyToClipboard]="sessionURL">Share session URL</button>
+
+  <h2 style="padding-top: 20px;">Ticket</h2>
   <h3>{{ticketTitle}}</h3>
   <p>{{ticketDescription}}</p>
 </mat-card-content>

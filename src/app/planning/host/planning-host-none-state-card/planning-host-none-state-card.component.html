@@ -6,7 +6,7 @@
     <h2>Session code</h2>
     <mat-card-subtitle>{{sessionCode}}</mat-card-subtitle>
 
-    <button mat-raised-button  [cdkCopyToClipboard]="sessionURL">Copy share session URL</button>
+    <button mat-raised-button [cdkCopyToClipboard]="sessionURL">Share session URL</button>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button class="purple-button-command" (click)="onClickAddTicket()">
