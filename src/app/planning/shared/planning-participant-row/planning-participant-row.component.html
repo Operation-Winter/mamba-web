@@ -1,9 +1,11 @@
 <mat-list-option [value]="participant!.participantId" [ngClass]="{ 'highlighted-participant-row': participant!.highlighted }">
   <mat-icon mat-list-icon>account_circle</mat-icon>
+  <mat-icon mat-list-icon *ngIf="showDownArrowIcon">arrow_drop_down</mat-icon>
+  
   <p class="left-align" style="flex-grow: inherit;">
     {{participant?.name}}
   </p>
-  
+
   <div class="right-align">
     <mat-icon mat-icon-button *ngIf="isVotingState">
       {{votingIcon(participant!.participantId)}}

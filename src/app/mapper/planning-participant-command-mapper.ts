@@ -1,3 +1,4 @@
+import { PlanningChangeNameMessage } from "../models/messages/planning-change-name-message"
 import { PlanningInvalidCommandMessage } from "../models/messages/planning-invalid-command-message"
 import { PlanningJoinSessionMessage } from "../models/messages/planning-join-session-message"
 import { PlanningSessionStateMessage } from "../models/messages/planning-session-state-message"
@@ -25,6 +26,11 @@ export class PlanningParticipantCommandMapper {
 
     mapReconnectCommand(uuid: string): PlanningCommandParticipantSend {
         return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.reconnect, null)
+    }
+
+    mapChangeNameCommand(uuid: string, name: string): PlanningCommandParticipantSend {
+        var message = new PlanningChangeNameMessage(name)
+        return new PlanningCommandParticipantSend(uuid, PlanningCommandParticipantSendType.changeName, message)
     }
 
     mapIncomingCommand(command: any): PlanningCommandParticipantReceive {

@@ -40,6 +40,7 @@ import { PlanningParticipantInvalidSessionStateCardComponent } from './planning/
 import { PlanningParticipantLeftSessionCardComponent } from './planning/participant/planning-participant-left-session-card/planning-participant-left-session-card.component';
 import { PlanningVotingResultsCardComponent } from './planning/shared/planning-voting-results-card/planning-voting-results-card.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ParticipantChangeNameDialogComponent } from './planning/participant/participant-change-name-dialog/participant-change-name-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     PlanningParticipantRemovedStateCardComponent,
     PlanningParticipantInvalidSessionStateCardComponent,
     PlanningParticipantLeftSessionCardComponent,
-    PlanningVotingResultsCardComponent
+    PlanningVotingResultsCardComponent,
+    ParticipantChangeNameDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ export class PlanningParticipantNoneStateCardComponent implements OnInit {
   @Input() sessionName: string = ""
   @Input() sessionCode: string = ""
   @Output() didTapLeaveSession = new EventEmitter<void>()
+  @Output() didTapChangeName = new EventEmitter<void>()
 
   get sessionURL(): string {
     return environment.baseWebURL + "/planning/participant?sessionCode=" + this.sessionCode
@@ -22,5 +23,9 @@ export class PlanningParticipantNoneStateCardComponent implements OnInit {
 
   onClickLeaveSession() {
     this.didTapLeaveSession.emit()
+  }
+
+  onClickChangeName() {
+    this.didTapChangeName.emit()
   }
 }

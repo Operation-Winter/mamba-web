@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { PlanningParticipant } from 'src/app/models/planning-participant';
 import { PlanningTicket } from 'src/app/models/planning-ticket';
 
@@ -12,6 +13,8 @@ export class PlanningParticipantParticipantsCardComponent implements OnInit {
   @Input() participants: PlanningParticipant[] = []
   @Input() isFinishedVotingState: boolean = false
   @Input() isVotingState: boolean = false
+
+  @ViewChild(MatMenuTrigger, {static: false}) menuTrigger!: MatMenuTrigger
 
   constructor() { }
 

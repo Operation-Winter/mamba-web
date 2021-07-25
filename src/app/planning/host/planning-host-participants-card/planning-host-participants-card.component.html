@@ -6,7 +6,7 @@
     <mat-selection-list #participantsList [multiple]="false">
       <app-planning-participant-row [matMenuTriggerFor]="menu" #menuTrigger *ngFor="let participant of participants"
         [participant]="participant" [isVotingState]="isVotingState" [isFinishedVotingState]="isFinishedVotingState"
-        [ticket]="ticket"></app-planning-participant-row>
+        [ticket]="ticket" [showDownArrowIcon]="true"></app-planning-participant-row>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onClickSkipVote(participantsList.selectedOptions.selected[0].value)"
           *ngIf="isVotingState">

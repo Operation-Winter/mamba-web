@@ -11,6 +11,7 @@ export class PlanningParticipantTicketCardComponent implements OnInit {
   @Input() ticketTitle: string = ""
   @Input() ticketDescription: string = ""
   @Output() didTapLeaveSession = new EventEmitter<string>()
+  @Output() didTapChangeName = new EventEmitter<void>()
 
   constructor() { }
 
@@ -19,5 +20,9 @@ export class PlanningParticipantTicketCardComponent implements OnInit {
 
   onClickLeaveSession() {
     this.didTapLeaveSession.emit()
+  }
+
+  onClickChangeName() {
+    this.didTapChangeName.emit()
   }
 }

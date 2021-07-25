@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UUID } from 'angular2-uuid';
 import { Subscription } from 'rxjs';
 import { webSocket } from 'rxjs/webSocket';
 import { PlanningParticipantCommandMapper } from 'src/app/mapper/planning-participant-command-mapper';
 import { PlanningPartitipantsMapper } from 'src/app/mapper/planning-partitipants-mapper';
+import { PlanningChangeNameMessage } from 'src/app/models/messages/planning-change-name-message';
 import { PlanningSessionStateMessage } from 'src/app/models/messages/planning-session-state-message';
 import { PlanningCommandParticipantReceive } from 'src/app/models/participant/planning-command-participant-receive';
 import { PlanningCommandParticipantReceiveType } from 'src/app/models/participant/planning-command-participant-receive-type.enum';
@@ -13,6 +15,8 @@ import { PlanningParticipant } from 'src/app/models/planning-participant';
 import { PlanningSessionState } from 'src/app/models/planning-session-state.enum';
 import { PlanningTicket } from 'src/app/models/planning-ticket';
 import { environment } from 'src/environments/environment';
+import { AddTicketDialogComponent } from '../../host/add-ticket-dialog/add-ticket-dialog.component';
+import { ParticipantChangeNameDialogComponent } from '../participant-change-name-dialog/participant-change-name-dialog.component';
 
 @Component({
   selector: 'app-planning-participant-landing',
@@ -96,7 +100,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
     return this.state == PlanningSessionState.participantLeft
   }
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.connect()
   }
 
@@ -165,6 +169,20 @@ export class PlanningParticipantLandingComponent implements OnInit {
   onClickVote(card: PlanningCard) {
     var command = this.participantCommandMapper.mapVoteCommand(this.uuid, card)
     this.sendCommand(command)
+  }
+
+  onClickChangeName() {
+    console.log("Change name tapped")
+    const dialogRef = this.dialog.open(ParticipantChangeNameDialogComponent, {
+      minWidth: '400px',
+      maxWidth: '800px',
+      data: new PlanningChangeNameMessage("")
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      var command = this.participantCommandMapper.mapChangeNameCommand(this.uuid, result.name)
+      this.sendCommand(command)
+    })
   }
 
   execute(command: PlanningCommandParticipantReceive) {

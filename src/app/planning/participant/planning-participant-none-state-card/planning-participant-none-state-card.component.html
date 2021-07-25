@@ -9,6 +9,9 @@
     <button mat-raised-button [cdkCopyToClipboard]="sessionURL">Share session URL</button>
   </mat-card-content>
   <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickChangeName()">
+      Change name
+    </button>
     <button mat-raised-button class="purple-button-command" (click)="onClickLeaveSession()">
       Leave session
     </button>

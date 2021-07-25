@@ -3,6 +3,9 @@
     [ticketTitle]="ticketTitle" [ticketDescription]="ticketDescription">
   </app-planning-landing-ticket-card-content>
   <mat-card-actions>
+    <button mat-raised-button class="purple-button-command" (click)="onClickChangeName()">
+      Change name
+    </button>
     <button mat-raised-button class="purple-button-command" (click)="onClickLeaveSession()">
       Leave session
     </button>

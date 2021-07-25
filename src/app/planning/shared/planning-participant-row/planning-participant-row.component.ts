@@ -13,7 +13,8 @@ export class PlanningParticipantRowComponent implements OnInit {
   @Input() participant: PlanningParticipant | undefined
   @Input() isVotingState: boolean = false
   @Input() isFinishedVotingState: boolean = false
-
+  @Input() showDownArrowIcon: boolean = false
+  
   constructor() { }
 
   ngOnInit() {

@@ -9,6 +9,7 @@ import { PlanningCommandHostReceive } from "../models/host/planning-command-host
 import { PlanningCommandHostReceiveType } from "../models/host/planning-command-host-receive-type.enum";
 import { PlanningSessionStateMessage } from "../models/messages/planning-session-state-message";
 import { PlanningInvalidCommandMessage } from "../models/messages/planning-invalid-command-message";
+import { PlanningChangeNameMessage } from "../models/messages/planning-change-name-message";
 
 export class PlanningHostCommandMapper {
     mapStartSessionCommand(uuid: string, sessionName: string, availableCards: PlanningCard[]): PlanningCommandHostSend {
