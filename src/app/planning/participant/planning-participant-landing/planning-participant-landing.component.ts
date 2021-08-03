@@ -182,6 +182,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       var command = this.participantCommandMapper.mapChangeNameCommand(this.uuid, result.name)
       this.sendCommand(command)
+      localStorage.setItem('userName', result.name)
     })
   }
 
