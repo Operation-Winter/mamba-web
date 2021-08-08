@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-planning-participant',
@@ -21,13 +21,9 @@ export class PlanningParticipantComponent implements OnInit {
     return localStorage.getItem('userName')
   }
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.uuid != null) {
-      this.shouldReconnect = true
-    }
-
     if (this.userNameLocal != null) {
       this.userName = this.userNameLocal
     }
@@ -37,6 +33,15 @@ export class PlanningParticipantComponent implements OnInit {
 
       if (this.userNameLocal != null && this.sessionCode != null) {
         this.shouldAutoConnect = true
+        this.router.navigate(
+          [],
+          {
+            relativeTo: this.route,
+            queryParams: { 'sessionCode': null },
+            queryParamsHandling: 'merge',
+          })
+      } else if (this.uuid != null && this.sessionCode == null) {
+        this.shouldReconnect = true
       }
     })
   }

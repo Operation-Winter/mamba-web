@@ -44,7 +44,7 @@ export class PlanningHostLandingComponent implements OnInit {
       tempUUID = this.sessionUUID
     }
     if (tempUUID == null) {
-      tempUUID = UUID.UUID()
+      tempUUID = UUID.UUID().toUpperCase()
       this.hostUUID = tempUUID
       sessionStorage.setItem('hostUUID', tempUUID)
     }
