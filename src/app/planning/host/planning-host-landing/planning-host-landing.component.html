@@ -1,21 +1,50 @@
-<app-planning-host-none-state-card [sessionName]="sessionName" [sessionCode]="sessionCode"
-  (didTapAddTicket)="onClickAddTicket()" (didTapEndSession)="onClickEndSession()" *ngIf="isNoneState">
+<app-planning-host-none-state-card
+  [sessionName]="sessionName"
+  [sessionCode]="sessionCode"
+  (didTapAddTicket)="onClickAddTicket()"
+  (didTapEndSession)="onClickEndSession()"
+  *ngIf="isNoneState"
+>
 </app-planning-host-none-state-card>
 
-<app-planning-host-ticket-card [sessionName]="sessionName" [sessionCode]="sessionCode" [ticketTitle]="ticket!.title"
-  [ticketDescription]="ticket!.description" [isVotingState]="isVotingState"
-  [isFinishedVotingState]="isFinishedVotingState" (didTapAddTicket)="onClickAddTicket()"
-  (didTapFinishVoting)="onClickFinishVoting()" (didTapEndSession)="onClickEndSession()" (didTapRevote)="onClickRevote()"
-  *ngIf="isVotingState || isFinishedVotingState">
+<app-planning-host-ticket-card
+  [sessionName]="sessionName"
+  [sessionCode]="sessionCode"
+  [ticketTitle]="ticket!.title"
+  [ticketDescription]="ticket!.description"
+  [isVotingState]="isVotingState"
+  [isFinishedVotingState]="isFinishedVotingState"
+  (didTapAddTicket)="onClickAddTicket()"
+  (didTapFinishVoting)="onClickFinishVoting()"
+  (didTapEndSession)="onClickEndSession()"
+  (didTapRevote)="onClickRevote()"
+  *ngIf="isVotingState || isFinishedVotingState"
+>
 </app-planning-host-ticket-card>
 
-<app-planning-error-state-card [sessionName]="sessionName" *ngIf="isErrorState"></app-planning-error-state-card>
+<app-planning-voting-results-card
+  [votes]="ticket?.ticketVotes"
+  *ngIf="isFinishedVotingState"
+></app-planning-voting-results-card>
 
-<app-planning-session-ended-card [sessionName]="sessionName" *ngIf="isSessionEndedState">
+<app-planning-error-state-card
+  [sessionName]="sessionName"
+  *ngIf="isErrorState"
+></app-planning-error-state-card>
+
+<app-planning-session-ended-card
+  [sessionName]="sessionName"
+  *ngIf="isSessionEndedState"
+>
 </app-planning-session-ended-card>
 
-<app-planning-host-participants-card [participants]="participants" [ticket]="ticket!" [isVotingState]="isVotingState"
-  [isFinishedVotingState]="isFinishedVotingState" (didTapSkipVote)="onClickSkipVote($event)"
+<app-planning-host-participants-card
+  [participants]="participants"
+  [ticket]="ticket!"
+  [isVotingState]="isVotingState"
+  [isFinishedVotingState]="isFinishedVotingState"
+  (didTapSkipVote)="onClickSkipVote($event)"
   (didTapRemoveParticipant)="onClickRemoveParticipant($event)"
-  *ngIf="isNoneState || isVotingState || isFinishedVotingState">
+  *ngIf="isNoneState || isVotingState || isFinishedVotingState"
+>
 </app-planning-host-participants-card>

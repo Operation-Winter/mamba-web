@@ -18,6 +18,11 @@
 >
 </app-planning-participant-ticket-card>
 
+<app-planning-voting-results-card
+  [votes]="ticket?.ticketVotes"
+  *ngIf="isFinishedVotingState"
+></app-planning-voting-results-card>
+
 <app-planning-participant-voting-state-card
   [availableCards]="availableCards"
   (didTapPlanningCard)="onClickVote($event)"

@@ -1,3 +1,21 @@
-<p>
-  planning-voting-results-card works!
-</p>
+<mat-card class="product-card">
+  <mat-card-content>
+    <div *ngIf="votes != undefined && votesGrouped.length > 0" style="display: flex">
+      <div
+        *ngFor="let voteGroup of votesGrouped"
+        [ngStyle]="{
+          width: voteGroup.widthPercentage + '%',
+          'background-color': 'rgba(56, 2, 59, ' + voteGroup.transparency + ')',
+          color: voteGroup.transparency <= 0.5 ? 'black' : 'white'
+        }"
+        class="centered-result-row"
+      >
+        {{ voteGroup.value }}
+      </div>
+    </div>
+
+    <div *ngIf="votes == undefined || votesGrouped.length == 0" class="centered-result-row">
+      No votes were made.
+    </div>
+  </mat-card-content>
+</mat-card>
