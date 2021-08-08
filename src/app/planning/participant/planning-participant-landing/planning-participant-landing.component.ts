@@ -14,6 +14,7 @@ import { PlanningCard } from 'src/app/models/planning-card.enum';
 import { PlanningParticipant } from 'src/app/models/planning-participant';
 import { PlanningSessionState } from 'src/app/models/planning-session-state.enum';
 import { PlanningTicket } from 'src/app/models/planning-ticket';
+import { PlanningTicketVote } from 'src/app/models/planning-ticket-vote';
 import { environment } from 'src/environments/environment';
 import { AddTicketDialogComponent } from '../../host/add-ticket-dialog/add-ticket-dialog.component';
 import { ParticipantChangeNameDialogComponent } from '../participant-change-name-dialog/participant-change-name-dialog.component';
@@ -66,6 +67,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
   availableCards: PlanningCard[] = []
   participants: PlanningParticipant[] = []
   ticket: PlanningTicket | undefined
+  ticketVote: PlanningTicketVote | undefined
   retryCount = 0
 
   get isNoneState() {
@@ -223,6 +225,8 @@ export class PlanningParticipantLandingComponent implements OnInit {
     this.sessionName = stateMessage.sessionName
     this.sessionCode = stateMessage.sessionCode
     this.ticket = stateMessage.ticket
+    var ticketVotes = this.ticket?.ticketVotes.filter(x => x.participantId == this.uuid.toUpperCase())
+    this.ticketVote = ticketVotes.length == 0 ? undefined : ticketVotes[0]
     this.availableCards = stateMessage.availableCards
     this.participants = sortParticipants
       ? PlanningPartitipantsMapper.sortedPartitipantsRows(stateMessage.ticket?.ticketVotes, stateMessage.participants)

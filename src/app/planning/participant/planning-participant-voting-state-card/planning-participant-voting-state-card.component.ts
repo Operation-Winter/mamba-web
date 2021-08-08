@@ -9,9 +9,8 @@ import { PlanningCard } from 'src/app/models/planning-card.enum';
 })
 export class PlanningParticipantVotingStateCardComponent implements OnInit {
   @Input() availableCards: PlanningCard[] = []
+  @Input() selectedCard: PlanningCard | undefined
   @Output() didTapPlanningCard = new EventEmitter<PlanningCard>()
-  
-  selectedCard: PlanningCard | undefined
   planningCardMapper = new PlanningCardMapper()
 
   constructor() { }

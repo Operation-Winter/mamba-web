@@ -25,6 +25,7 @@
 
 <app-planning-participant-voting-state-card
   [availableCards]="availableCards"
+  [selectedCard]="ticketVote?.selectedCard"
   (didTapPlanningCard)="onClickVote($event)"
   *ngIf="isVotingState"
 ></app-planning-participant-voting-state-card>
