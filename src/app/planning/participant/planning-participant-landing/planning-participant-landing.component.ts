@@ -174,11 +174,10 @@ export class PlanningParticipantLandingComponent implements OnInit {
   }
 
   onClickChangeName() {
-    console.log("Change name tapped")
     const dialogRef = this.dialog.open(ParticipantChangeNameDialogComponent, {
       minWidth: '400px',
       maxWidth: '800px',
-      data: new PlanningChangeNameMessage("")
+      data: new PlanningChangeNameMessage(this.userName)
     })
 
     dialogRef.afterClosed().subscribe(result => {
