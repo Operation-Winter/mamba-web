@@ -8,6 +8,7 @@
 <ng-template #setup>
   <app-planning-host-setup
     [(sessionName)]="sessionName"
+    [(autoCompleteVoting)]="autoCompleteVoting"
     [(selectedAvailableCards)]="selectedAvailableCards"
     (startSessionTapped)="didTapStartSession()"
   ></app-planning-host-setup>
@@ -16,6 +17,7 @@
 <ng-template #landing>
   <app-planning-host-landing
     [sessionName]="sessionName"
+    [autoCompleteVoting]="autoCompleteVoting"
     [availableCards]="availableCards"
     [reconnect]="shouldReconnect"
   ></app-planning-host-landing>

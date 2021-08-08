@@ -16,6 +16,7 @@ export class PlanningHostComponent implements OnInit {
   sessionName: string = ""
   sessionStarted: boolean = false
   shouldReconnect: boolean = false
+  autoCompleteVoting: boolean = true
 
   get uuid() {
     return sessionStorage.getItem('hostUUID')

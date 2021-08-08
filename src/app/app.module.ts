@@ -41,6 +41,7 @@ import { PlanningParticipantLeftSessionCardComponent } from './planning/particip
 import { PlanningVotingResultsCardComponent } from './planning/shared/planning-voting-results-card/planning-voting-results-card.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ParticipantChangeNameDialogComponent } from './planning/participant/participant-change-name-dialog/participant-change-name-dialog.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ParticipantChangeNameDialogComponent } from './planning/participant/par
     MatDialogModule,
     MatMenuModule,
     MatExpansionModule,
-    ClipboardModule
+    ClipboardModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

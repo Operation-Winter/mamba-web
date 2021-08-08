@@ -58,6 +58,7 @@ export class PlanningHostLandingComponent implements OnInit {
   @Input() sessionName: string = ""
   @Input() availableCards: PlanningCard[] = []
   @Input() reconnect: boolean = false
+  @Input() autoCompleteVoting: boolean = true
 
   hostUUID: string | null = null
   state = PlanningSessionState.none
@@ -134,7 +135,7 @@ export class PlanningHostLandingComponent implements OnInit {
       var command = this.hostCommandMapper.mapReconnectCommand(this.uuid)
       this.sendCommand(command)
     } else {
-      var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.availableCards)
+      var command = this.hostCommandMapper.mapStartSessionCommand(this.uuid, this.sessionName, this.autoCompleteVoting, this.availableCards)
       this.sendCommand(command)
     }
   }

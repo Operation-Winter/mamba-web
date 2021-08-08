@@ -12,8 +12,8 @@ import { PlanningInvalidCommandMessage } from "../models/messages/planning-inval
 import { PlanningChangeNameMessage } from "../models/messages/planning-change-name-message";
 
 export class PlanningHostCommandMapper {
-    mapStartSessionCommand(uuid: string, sessionName: string, availableCards: PlanningCard[]): PlanningCommandHostSend {
-        var message = new PlanningStartSessionMessage(sessionName, availableCards)
+    mapStartSessionCommand(uuid: string, sessionName: string, autoCompleteVoting: boolean, availableCards: PlanningCard[]): PlanningCommandHostSend {
+        var message = new PlanningStartSessionMessage(sessionName, autoCompleteVoting, availableCards)
         return new PlanningCommandHostSend(uuid, PlanningCommandHostSendType.startSession, message)
     }
 

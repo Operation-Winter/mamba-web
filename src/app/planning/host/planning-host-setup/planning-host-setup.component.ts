@@ -14,6 +14,7 @@ export class PlanningHostSetupComponent implements OnInit {
   selectedAvailableCardValues: string[] = this.availableCards
   sessionNameValue: string = ""
   panelOpenState = false
+  autoCompleteVotingValue: boolean = true
 
   @Input()
   get selectedAvailableCards() {
@@ -34,6 +35,17 @@ export class PlanningHostSetupComponent implements OnInit {
     this.sessionNameChange.emit(value)
   }
   @Output() sessionNameChange = new EventEmitter<string>()
+
+  @Input()
+  get autoCompleteVoting(): boolean {
+    return this.autoCompleteVotingValue
+  }
+  set autoCompleteVoting(value) {
+    console.log(value)
+    this.autoCompleteVotingValue = value
+    this.autoCompleteVotingChange.emit(value)
+  }
+  @Output() autoCompleteVotingChange = new EventEmitter<boolean>()
 
   @Output('startSessionTapped') startSessionTapped = new EventEmitter<boolean>()
 

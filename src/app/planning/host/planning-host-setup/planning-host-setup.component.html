@@ -19,6 +19,15 @@
         />
       </mat-form-field>
 
+      <mat-slide-toggle
+        [checked]="autoCompleteVoting"
+        (change)="autoCompleteVoting = $event.checked"
+        style="padding-bottom: 20px"
+      >
+        Automatically finish voting when all participants have voted on a
+        ticket.
+      </mat-slide-toggle>
+
       <mat-expansion-panel
         (opened)="(panelOpenState)"
         (closed)="(!panelOpenState)"
