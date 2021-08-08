@@ -6,8 +6,8 @@ export class PlanningPartitipantsMapper {
         if (ticketVotes == null || ticketVotes == undefined || ticketVotes.length == 0) {
             return participants
         }
-
-        var filteredGroupedVotes = PlanningPartitipantsMapper.groupBy(ticketVotes, "selectedCard")
+        var filteredVotes = ticketVotes.filter(x => x.selectedCard != null)
+        var filteredGroupedVotes = PlanningPartitipantsMapper.groupBy(filteredVotes, "selectedCard")
         var meanCount = this.lastValue(filteredGroupedVotes.values())
 
         var participantsSorted: PlanningParticipant[] = []
@@ -25,6 +25,12 @@ export class PlanningPartitipantsMapper {
                     participantsSorted.push(participant)
                 })
             }
+        })
+
+        ticketVotes.filter(x => x.selectedCard == null).forEach(value => {
+            var participant = participants.filter(participant => participant.participantId == value.participantId)[0]
+            participant.highlighted = false
+            participantsSorted.push(participant)
         })
 
         return participantsSorted.sort((x, y) => {
