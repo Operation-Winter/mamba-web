@@ -16,6 +16,7 @@ import { AddTicketDialogComponent } from '../add-ticket-dialog/add-ticket-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { PlanningPartitipantsMapper } from 'src/app/mapper/planning-partitipants-mapper';
+import { PlanningInvalidCommandMessage } from 'src/app/models/messages/planning-invalid-command-message';
 
 @Component({
   selector: 'app-planning-host-landing',
@@ -66,6 +67,8 @@ export class PlanningHostLandingComponent implements OnInit {
   participants: PlanningParticipant[] = []
   ticket: PlanningTicket | undefined
   retryCount = 0
+  errorCode = ""
+  errorDescription = ""
 
   get isNoneState() {
     return this.state == PlanningSessionState.none
@@ -99,6 +102,8 @@ export class PlanningHostLandingComponent implements OnInit {
         this.execute(incomingCommand)
       },
       err => {
+        this.errorCode = "2001"
+        this.errorDescription = "Something went wrong and the connection to the server has been lost"
         this.state = PlanningSessionState.error
         console.log(err)
       },
@@ -123,6 +128,8 @@ export class PlanningHostLandingComponent implements OnInit {
     this.retryCount += 1
 
     if (this.retryCount > 3) {
+      this.errorCode = "2000"
+      this.errorDescription = "Failed to reconnect to server"
       this.state = PlanningSessionState.error
     } else {
       this.connect()
@@ -201,9 +208,15 @@ export class PlanningHostLandingComponent implements OnInit {
         this.assignStateMessage(command.message as PlanningSessionStateMessage, true)
         break
       case PlanningCommandHostReceiveType.invalidCommand:
+        this.assignErrorMessage(command.message as PlanningInvalidCommandMessage)
         this.state = PlanningSessionState.error
         break
     }
+  }
+
+  assignErrorMessage(invalidMessage: PlanningInvalidCommandMessage) {
+    this.errorCode = invalidMessage.code
+    this.errorDescription = invalidMessage.description
   }
 
   assignStateMessage(stateMessage: PlanningSessionStateMessage, sortParticipants: boolean) {

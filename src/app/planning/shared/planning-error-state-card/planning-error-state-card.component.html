@@ -1,9 +1,16 @@
 <mat-card class="product-card">
   <mat-card-content>
     <mat-card-title>{{sessionName}}</mat-card-title>
-    <mat-card-subtitle>Something has gone horribly wrong. Please start a new session or join again.</mat-card-subtitle>
+    <mat-card-subtitle>
+      An error has occured <br/>
+      <b style="color: red">Error code:</b> {{errorCode}}<br/>
+      <b style="color: red">Error description:</b> {{errorDescription}}<br/>
+    </mat-card-subtitle>
   </mat-card-content>
   <mat-card-actions>
+    <button mat-raised-button class="purple-button" (click)="didTapReconnect.emit()" style="margin: 0px 0px !important; margin-bottom: 10px !important;">
+      Reconnect to session
+    </button>
     <button mat-raised-button class="purple-button" routerLink="/" style="margin: 0px 0px !important;">
       Go back to landing
     </button>

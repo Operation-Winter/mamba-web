@@ -6,6 +6,7 @@ import { webSocket } from 'rxjs/webSocket';
 import { PlanningParticipantCommandMapper } from 'src/app/mapper/planning-participant-command-mapper';
 import { PlanningPartitipantsMapper } from 'src/app/mapper/planning-partitipants-mapper';
 import { PlanningChangeNameMessage } from 'src/app/models/messages/planning-change-name-message';
+import { PlanningInvalidCommandMessage } from 'src/app/models/messages/planning-invalid-command-message';
 import { PlanningSessionStateMessage } from 'src/app/models/messages/planning-session-state-message';
 import { PlanningCommandParticipantReceive } from 'src/app/models/participant/planning-command-participant-receive';
 import { PlanningCommandParticipantReceiveType } from 'src/app/models/participant/planning-command-participant-receive-type.enum';
@@ -68,6 +69,8 @@ export class PlanningParticipantLandingComponent implements OnInit {
   ticket: PlanningTicket | undefined
   ticketVote: PlanningTicketVote | undefined
   retryCount = 0
+  errorCode = ""
+  errorDescription = ""
 
   get isNoneState() {
     return this.state == PlanningSessionState.none
@@ -113,6 +116,8 @@ export class PlanningParticipantLandingComponent implements OnInit {
         this.execute(incomingCommand)
       },
       err => {
+        this.errorCode = "2001"
+        this.errorDescription = "Something went wrong and the connection to the server has been lost"
         this.state = PlanningSessionState.error
         console.log(err)
       },
@@ -137,6 +142,8 @@ export class PlanningParticipantLandingComponent implements OnInit {
     this.retryCount += 1
           
     if (this.retryCount > 3) {
+      this.errorCode = "2000"
+      this.errorDescription = "Failed to reconnect to server"
       this.state = PlanningSessionState.error
     } else {
       this.connect()
@@ -202,6 +209,7 @@ export class PlanningParticipantLandingComponent implements OnInit {
         this.assignStateMessage(command.message as PlanningSessionStateMessage, true)
         break
       case PlanningCommandParticipantReceiveType.invalidCommand:
+        this.assignErrorMessage(command.message as PlanningInvalidCommandMessage)
         this.state = PlanningSessionState.error
         break
       case PlanningCommandParticipantReceiveType.endSession:
@@ -217,6 +225,11 @@ export class PlanningParticipantLandingComponent implements OnInit {
         this.state = PlanningSessionState.invalidSession
         break
     }
+  }
+
+  assignErrorMessage(invalidMessage: PlanningInvalidCommandMessage) {
+    this.errorCode = invalidMessage.code
+    this.errorDescription = invalidMessage.description
   }
 
   assignStateMessage(stateMessage: PlanningSessionStateMessage, sortParticipants: boolean) {

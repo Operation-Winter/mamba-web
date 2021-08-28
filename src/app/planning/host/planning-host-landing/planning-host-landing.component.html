@@ -29,6 +29,9 @@
 
 <app-planning-error-state-card
   [sessionName]="sessionName"
+  [errorCode]="errorCode"
+  [errorDescription]="errorDescription"
+  (didTapReconnect)="tryReconnect()"
   *ngIf="isErrorState"
 ></app-planning-error-state-card>
 
