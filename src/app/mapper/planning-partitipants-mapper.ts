@@ -33,6 +33,10 @@ export class PlanningPartitipantsMapper {
             participantsSorted.push(participant)
         })
 
+        var participantIds = participantsSorted.map((x) => x.participantId)
+        var newParticipants = participants.filter((x) => !participantIds.includes(x.participantId))
+        newParticipants.forEach((participant) => participantsSorted.push(participant))
+
         return participantsSorted.sort((x, y) => {
             if (x.highlighted && y.highlighted) {
                 return 1
