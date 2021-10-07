@@ -175,6 +175,7 @@ export class PlanningHostLandingComponent implements OnInit {
     var command = this.hostCommandMapper.mapEndSessionCommand(this.uuid)
     this.resetUUID()
     this.sendCommand(command)
+    this.state = PlanningSessionState.sessionEnded
   }
 
   onClickRevote() {
